@@ -1,0 +1,9 @@
+.g18-search-result-image {
+    height: 100px;
+    width: 150px;
+    background-size: cover;
+}
+
+.g18-search-result-text {
+    font-size: 30px;
+}
