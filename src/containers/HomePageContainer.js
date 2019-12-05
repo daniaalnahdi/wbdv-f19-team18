@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import HomePage from "../components/HomePage";
+import HomePage from "../pages/HomePage";
 import UserService from "../service/UserService";
 
 const stateToPropertyMapper = (state, ownProps) => {
