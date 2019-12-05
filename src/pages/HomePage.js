@@ -20,7 +20,7 @@ const HomePage = ({}) => {
             <LoginPage />
           </Route>
           <Route
-            path="/search"
+            path="/search/:searchName?"
             render={() => (
               <div className="container-fluid my-3">
                 <Provider store={store}>
