@@ -1,4 +1,3 @@
-
 const SearchPageReducer = (prevState = {recipes: []}, action) => {
     switch (action.type) {
         case 'UPDATE_ALL_RECIPES':

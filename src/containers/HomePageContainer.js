@@ -1,35 +1,26 @@
 import {connect} from 'react-redux';
 import HomePage from "../components/HomePage";
-import RecipeService from "../service/RecipeService";
+import UserService from "../service/UserService";
 
 const stateToPropertyMapper = (state, ownProps) => {
     return {
-        recipes: state.recipes/*[{ id: 1, name: "Curried Coconut Chicken" }]*/
+        user: state.user
     };
 };
 
-const service = RecipeService.getInstance();
+const service = UserService.getInstance();
 
 const dispatcherToPropertyMapper = (dispatch, ownProps) => {
     return {
-        homeRecipeByName: name => {
-            service.homeRecipeByName(name)
-                .then(recipes => {
+        login: (username, password) => {
+            service.login(username, password)
+                .then(user => {
                     dispatch({
-                        type: 'UPDATE_ALL_RECIPES',
-                        recipes: recipes
+                        type: 'LOGIN',
+                        user: user
                     });
                 });
         },
-        homeRecipeById: id => {
-            service.homeRecipeInfoById(id)
-                .then(recipe => {
-                    dispatch({
-                        type: 'FIND_RECIPE',
-                        recipe: recipe
-                    });
-                });
-        }
     };
 };
 

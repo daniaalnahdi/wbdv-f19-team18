@@ -1,28 +1,19 @@
 import React from 'react';
 import './App.css';
-import SearchPageContainer from "./containers/SearchPageContainer";
-import { Provider } from "react-redux";
 import { createStore } from "redux";
 import SearchPageReducer from "./reducers/SearchPageReducer";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import DetailPage from "./pages/DetailPage";
+import { BrowserRouter as Router } from "react-router-dom";
+import HomePageContainer from "./containers/HomePageContainer";
+import { Provider } from "react-redux";
+import HomePageReducer from "./reducers/HomePageReducer";
 
 const App = () => {
-    const store = createStore(SearchPageReducer);
+    const store = createStore(HomePageReducer);
     return (
         <Router>
-            <Switch>
-                <Route path="/recipe/:id"
-                       render={(props) => <DetailPage recipeId={props.match.params.id}/>}/>
-                <Route path="*"
-                       render={() =>
-                           <div className="container-fluid my-3">
-                               <Provider store={store}>
-                                   <SearchPageContainer/>
-                               </Provider>
-                           </div>
-                       }/>
-            </Switch>
+            <Provider store={store}>
+                <HomePageContainer/>
+            </Provider>
         </Router>
     );
 };
