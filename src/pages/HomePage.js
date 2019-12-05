@@ -7,6 +7,7 @@ import { createStore } from "redux";
 import SearchPageReducer from "../reducers/SearchPageReducer";
 import NavBar from "../components/NavBar";
 import LoginPage from "../pages/LoginPage";
+import ProfilePage from "./ProfilePage";
 
 const HomePage = ({}) => {
   const store = createStore(SearchPageReducer);
@@ -31,6 +32,10 @@ const HomePage = ({}) => {
           <Route
             path="/recipe/:id"
             render={props => <DetailPage recipeId={props.match.params.id} />}
+          />
+          <Route
+            path="/profile/:id"
+            render={props => <ProfilePage userId={props.match.params.id} />}
           />
         </Switch>
       </Router>
