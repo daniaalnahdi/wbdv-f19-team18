@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/SearchPage.css';
 
-const SearchResult = ({recipe}) => {
+const SearchResultItem = ({recipe}) => {
     return (
         <div className="row">
             <img className="g18-search-result-image rounded"
@@ -20,4 +20,4 @@ const SearchResult = ({recipe}) => {
     );
 };
 
-export default SearchResult;
+export default SearchResultItem;
