@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchResult from "./SearchResult";
+import SearchResult from "../pages/SearchResult";
 import { Link } from "react-router-dom";
 
 const SearchResultList = ({recipes}) => {

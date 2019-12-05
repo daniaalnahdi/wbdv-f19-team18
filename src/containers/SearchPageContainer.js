@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import SearchPage from "../components/SearchPage";
+import SearchPage from "../pages/SearchPage";
 import RecipeService from "../service/RecipeService";
 
 const stateToPropertyMapper = (state, ownProps) => {

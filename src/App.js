@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import SearchPageReducer from "./reducers/SearchPageReducer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import DetailPage from "./components/DetailPage";
+import DetailPage from "./pages/DetailPage";
 
 const App = () => {
     const store = createStore(SearchPageReducer);
