@@ -7,6 +7,7 @@ import { createStore } from "redux";
 import SearchPageReducer from "../reducers/SearchPageReducer";
 import NavBar from "../components/NavBar";
 import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "./ProfilePage";
 
 const HomePage = ({}) => {
@@ -18,6 +19,9 @@ const HomePage = ({}) => {
         <Switch>
           <Route path="/login">
             <LoginPage />
+          </Route>
+          <Route path="/register">
+            <RegisterPage />
           </Route>
           <Route
             path="/search/:searchName?"
