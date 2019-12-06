@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import RecipeService from "../service/RecipeService";
 import RecipeDetailsLikes from "../components/RecipeDetailsLikes";
 import RecipeDetailsReviews from "../components/RecipeDetailsReviews";
@@ -67,6 +69,7 @@ class DetailPage extends React.Component {
       recipe: null,
       liked: this.isLiked()
     };
+    console.log(this.props.isLoggedIn);
   }
 
   componentDidMount = () => {
@@ -110,30 +113,34 @@ class DetailPage extends React.Component {
   };
 
   renderLikeButton = () => {
-    if (this.state.isLiked) {
-      return (
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={() => {
-            this.unlikeRecipe();
-          }}
-        >
-          Unlike
-        </button>
-      );
+    if (!this.props.isLoggedIn) {
+      return <Link to="/login">Login to Like!</Link>;
     } else {
-      return (
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={() => {
-            this.likeRecipe();
-          }}
-        >
-          Like
-        </button>
-      );
+      if (this.state.isLiked) {
+        return (
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => {
+              this.unlikeRecipe();
+            }}
+          >
+            Unlike
+          </button>
+        );
+      } else {
+        return (
+          <button
+            type="button"
+            className="btn btn-success"
+            onClick={() => {
+              this.likeRecipe();
+            }}
+          >
+            Like
+          </button>
+        );
+      }
     }
   };
 
@@ -164,7 +171,7 @@ class DetailPage extends React.Component {
           <h4>Instructions:</h4>
           <p>{recipe && recipe.instructions}</p>
         </div>
-        {this.renderLikeButton(this.state.isLiked)}
+        {this.renderLikeButton()}
         <RecipeDetailsLikes
           totalLikes={recipeInteractions.totalLikes}
           likedBy={recipeInteractions.likedBy}
