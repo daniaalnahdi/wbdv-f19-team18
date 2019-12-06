@@ -33,6 +33,7 @@ const recipeInteractions = {
   totalReviews: 2,
   reviews: [
     {
+      id: 123,
       author: {
         name: "User 1",
         username: "username1"
@@ -50,6 +51,7 @@ const recipeInteractions = {
       ]
     },
     {
+      id: 1234,
       author: {
         name: "User 2",
         username: "username2"
