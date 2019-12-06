@@ -5,21 +5,7 @@ import RecipeService from "../service/RecipeService";
 import RecipeDetailsLikes from "../components/RecipeDetailsLikes";
 import RecipeDetailsReviews from "../components/RecipeDetailsReviews";
 
-const user = {
-  likedRecipes: [
-    {
-      recipeTitle: "Beef Burgundy",
-      recipeId: 101141
-    },
-    {
-      recipeTitle: "Kale Soup",
-      recipeId: 702741
-    }
-  ]
-};
-
 const recipeInteractions = {
-  totalLikes: 12,
   likedBy: [
     {
       name: "User 1",
@@ -30,31 +16,33 @@ const recipeInteractions = {
       username: "username2"
     }
   ],
-  totalReviews: 2,
   reviews: [
     {
-      id: 123,
-      author: {
+      reviewId: 1,
+      user: {
         name: "User 1",
-        username: "username1"
+        username: "username1",
+        userId: 123
       },
       heading: "Review 1",
       body: "Yum",
       replies: [
         {
-          author: {
-            name: "User 1",
-            username: "username1"
+          user: {
+            name: "User 2",
+            username: "username2",
+            userId: 234
           },
           body: "I agree"
         }
       ]
     },
     {
-      id: 1234,
-      author: {
+      reviewId: 2,
+      user: {
         name: "User 2",
-        username: "username2"
+        username: "username2",
+        userId: 234
       },
       heading: "Review 2",
       body: "Good",
@@ -71,7 +59,6 @@ class DetailPage extends React.Component {
       recipe: null,
       liked: this.isLiked()
     };
-    console.log(this.props.isLoggedIn);
   }
 
   componentDidMount = () => {
@@ -89,6 +76,7 @@ class DetailPage extends React.Component {
     }
   };
 
+  /* LIKE FUNCTIONALITY */
   //TODO check if the recipe has been liked
   isLiked = () => {
     return false;
@@ -146,6 +134,8 @@ class DetailPage extends React.Component {
     }
   };
 
+  /* REVIEW FUNCTIONALITY */
+
   render = () => {
     const recipe = this.state.recipe;
     return (
@@ -174,12 +164,11 @@ class DetailPage extends React.Component {
           <p>{recipe && recipe.instructions}</p>
         </div>
         {this.renderLikeButton()}
-        <RecipeDetailsLikes
-          totalLikes={recipeInteractions.totalLikes}
-          likedBy={recipeInteractions.likedBy}
-        />
+        <RecipeDetailsLikes likedBy={recipeInteractions.likedBy} />
         <RecipeDetailsReviews
-          totalReviews={recipeInteractions.totalReviews}
+          isLoggedIn={this.props.isLoggedIn}
+          admin={this.props.user.admin}
+          userId={this.props.user.userId}
           reviews={recipeInteractions.reviews}
         />
       </div>

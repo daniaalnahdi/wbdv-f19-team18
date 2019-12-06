@@ -5,15 +5,30 @@ class RecipeDetailsReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalReviews: this.props.totalReviews,
       reviews: this.props.reviews
     };
+  }
+
+  renderDeleteButton(authorId) {
+    if (this.props.isLoggedIn) {
+      //if admin, add delete for all reviews
+      if (this.props.admin) {
+        return <button>Delete</button>;
+
+        //else, add button if logged in user = review author
+      } else {
+        if (this.props.userId === authorId) {
+          return <button>Delete</button>;
+        }
+      }
+    }
+    //if not logged in, don't add delete button at all
   }
 
   render() {
     return (
       <div className="border">
-        <h4>Total Reviews: {this.state.totalReviews}</h4>
+        <h4>Total Reviews: {this.state.reviews.length}</h4>
         <h4>Reviews:</h4>
         <ul className="list-group">
           {this.state.reviews &&
@@ -24,17 +39,18 @@ class RecipeDetailsReview extends React.Component {
                 <li className="list-group-item">
                   <h3>{review.heading}</h3>
                   Reviewed By:
-                  <Link to={`/profile/${review.author.username}`}>
-                    {review.author.name}
+                  <Link to={`/profile/${review.user.username}`}>
+                    {review.user.name}
                   </Link>
                   <p>{review.body}</p>
+                  {this.renderDeleteButton(review.user.userId)}
                   <ul>
                     {review.replies &&
                       review.replies.map(reply => {
                         return (
                           <li>
-                            <Link to={`/profile/${reply.author.username}`}>
-                              {reply.author.name}
+                            <Link to={`/profile/${reply.user.username}`}>
+                              {reply.user.name}
                             </Link>
                             : {reply.body}
                           </li>

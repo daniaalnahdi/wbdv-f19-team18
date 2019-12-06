@@ -51,19 +51,37 @@ const anonUser = {
 };
 
 const loggedInUser = {
+  userId: 123,
+  name: "User 1",
+  username: "username1",
+  password: "password",
+  admin: false,
+  likedRecipes: [
+    {
+      recipeTitle: "Beef Burgundy",
+      recipeId: 101141
+    },
+    {
+      recipeTitle: "Kale Soup",
+      recipeId: 702741
+    }
+  ],
+  reviewedRecipes: [],
   friendsRecentLikes: [
     {
       recipeTitle: "Beef Burgundy",
       recipeId: 101141,
       user: {
-        name: "User 1",
-        username: "username1"
+        userId: 234,
+        name: "User 2",
+        username: "username2"
       }
     },
     {
       recipeTitle: "Apple Bread",
       recipeId: 466266,
       user: {
+        userId: 345,
         name: "User 3",
         username: "username3"
       }
@@ -74,6 +92,7 @@ const loggedInUser = {
       recipeTitle: "Beef Burgundy",
       recipeId: 101141,
       user: {
+        userId: 234,
         name: "User 2",
         username: "username2"
       }
@@ -82,7 +101,7 @@ const loggedInUser = {
 };
 
 // TODO -- check if user is actually logged in
-const LoggedIn = false;
+const LoggedIn = true;
 
 const store = createStore(SearchPageReducer);
 
@@ -124,6 +143,7 @@ class HomePage extends React.Component {
                 <DetailPage
                   recipeId={props.match.params.id}
                   isLoggedIn={this.state.isLoggedIn}
+                  user={this.state.isLoggedIn ? loggedInUser : anonUser}
                 />
               )}
             />

@@ -5,7 +5,6 @@ class RecipeDetailsLikes extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      totalLikes: this.props.totalLikes,
       likedBy: this.props.likedBy
     };
   }
@@ -13,7 +12,7 @@ class RecipeDetailsLikes extends React.Component {
   render() {
     return (
       <div className="border">
-        <h4>Total Likes: {this.state.totalLikes}</h4>
+        <h4>Total Likes: {this.state.likedBy.length}</h4>
         <h4>Liked By:</h4>
         <ul className="list-group list-group-horizontal">
           {this.state.likedBy &&
