@@ -8,6 +8,18 @@ export default class RegisterPage extends React.Component {
         <h1>Register</h1>
         <form>
           <div className="form-group row">
+            <label for="nameFld" className="col-sm-2 col-form-label">
+              Full Name
+            </label>
+            <div class="col-sm-10">
+              <input
+                className="form-control"
+                id="nameFld"
+                placeholder="Alice Wonderland"
+              />
+            </div>
+          </div>
+          <div className="form-group row">
             <label for="usernameFld" className="col-sm-2 col-form-label">
               Username
             </label>
@@ -50,8 +62,14 @@ export default class RegisterPage extends React.Component {
               User Role?
             </label>
             <div class="col-sm-10">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1"/>
-    <label class="form-check-label" for="exampleCheck1">Admin</label>
+              <input
+                type="checkbox"
+                class="form-check-input"
+                id="exampleCheck1"
+              />
+              <label class="form-check-label" for="exampleCheck1">
+                Admin
+              </label>
             </div>
           </div>
           <div className="form-group row">
@@ -62,7 +80,7 @@ export default class RegisterPage extends React.Component {
               </button>
               <div className="row">
                 <div className="col-6">
-                  <Link to='/login'>Login</Link>
+                  <Link to="/login">Login</Link>
                 </div>
               </div>
             </div>
