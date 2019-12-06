@@ -7,7 +7,9 @@ import SearchPageReducer from "../reducers/SearchPageReducer";
 //UI Elements
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
-import RecipeLikesFeed from "../components/RecipeLikesFeed";
+import HomePageLikesFeed from "../components/HomePageLikesFeed";
+import HomePageReviewsFeed from "../components/HomePageReviewsFeed";
+
 //Pages
 import DetailPage from "../pages/DetailPage";
 import LoginPage from "../pages/LoginPage";
@@ -79,8 +81,8 @@ const loggedInUser = {
   ]
 };
 
-// TODO -- check if use is actually logged in
-const LoggedIn = true;
+// TODO -- check if user is actually logged in
+const LoggedIn = false;
 
 const store = createStore(SearchPageReducer);
 
@@ -130,12 +132,20 @@ class HomePage extends React.Component {
               render={props => <ProfilePage userId={props.match.params.id} />}
             />
             <Route path="/">
-              <RecipeLikesFeed
+              <HomePageLikesFeed
                 isLoggedIn={this.state.isLoggedIn}
                 likes={
                   this.state.isLoggedIn
                     ? anonUser.allRecentLikes
                     : loggedInUser.friendsRecentLikes
+                }
+              />
+              <HomePageReviewsFeed
+                isLoggedIn={this.state.isLoggedIn}
+                reviews={
+                  this.state.isLoggedIn
+                    ? anonUser.allRecentReviews
+                    : loggedInUser.friendsRecentReviews
                 }
               />
             </Route>
