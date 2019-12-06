@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default class RegisterPage extends React.Component {
   render() {
     return (
-      <div class="container-fluid">
+      <button class="container-fluid">
         <h1>Register</h1>
         <form>
           <div className="form-group row">
@@ -54,9 +54,9 @@ export default class RegisterPage extends React.Component {
     <label class="form-check-label" for="exampleCheck1">Admin</label>
             </div>
           </div>
-          <div className="form-group row">
+          <button className="form-group row">
             <label className="col-sm-2 col-form-label"></label>
-            <div className="col-sm-10">
+            <button className="col-sm-10">
               <button type="button" className="btn btn-primary btn-block">
                 Sign Up
               </button>
@@ -65,10 +65,10 @@ export default class RegisterPage extends React.Component {
                   <Link to='/login'>Login</Link>
                 </div>
               </div>
-            </div>
-          </div>
+            </button>
+          </button>
         </form>
-      </div>
+      </button>
     );
   }
 }
