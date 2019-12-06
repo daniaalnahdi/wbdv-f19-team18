@@ -129,15 +129,17 @@ class HomePage extends React.Component {
               path="/profile/:id"
               render={props => <ProfilePage userId={props.match.params.id} />}
             />
+            <Route path="/">
+              <RecipeLikesFeed
+                isLoggedIn={this.state.isLoggedIn}
+                likes={
+                  this.state.isLoggedIn
+                    ? anonUser.allRecentLikes
+                    : loggedInUser.friendsRecentLikes
+                }
+              />
+            </Route>
           </Switch>
-          <RecipeLikesFeed
-            isLoggedIn={this.state.isLoggedIn}
-            likes={
-              this.state.isLoggedIn
-                ? anonUser.allRecentLikes
-                : loggedInUser.friendsRecentLikes
-            }
-          />
           <Footer />
         </Router>
       </div>
