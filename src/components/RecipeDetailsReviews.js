@@ -19,6 +19,8 @@ class RecipeDetailsReview extends React.Component {
           {this.state.reviews &&
             this.state.reviews.map(review => {
               return (
+                //TODO - seperate into individual component with unique ID
+                // give delete ability for admin to delete
                 <li className="list-group-item">
                   <h3>{review.heading}</h3>
                   Reviewed By:
