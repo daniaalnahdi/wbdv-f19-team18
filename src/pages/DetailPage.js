@@ -1,6 +1,7 @@
 import React from "react";
 import RecipeService from "../service/RecipeService";
-import RecipeLikes from "../components/RecipeLikes";
+import RecipeDetailsLikes from "../components/RecipeDetailsLikes";
+import RecipeDetailsReviews from "../components/RecipeDetailsReviews";
 
 const user = {
   likedRecipes: [
@@ -15,7 +16,7 @@ const user = {
   ]
 };
 
-const likes = {
+const recipeInteractions = {
   totalLikes: 12,
   likedBy: [
     {
@@ -25,6 +26,35 @@ const likes = {
     {
       name: "User 2",
       username: "username2"
+    }
+  ],
+  totalReviews: 2,
+  reviews: [
+    {
+      author: {
+        name: "User 1",
+        username: "username1"
+      },
+      heading: "Review 1",
+      body: "Yum",
+      replies: [
+        {
+          author: {
+            name: "User 1",
+            username: "username1"
+          },
+          body: "I agree"
+        }
+      ]
+    },
+    {
+      author: {
+        name: "User 2",
+        username: "username2"
+      },
+      heading: "Review 2",
+      body: "Good",
+      replies: []
     }
   ]
 };
@@ -54,15 +84,12 @@ class DetailPage extends React.Component {
     }
   };
 
-  //Checks if the recipe is liked by the user
+  //TODO check if the recipe has been liked
   isLiked = () => {
-    // need to iterate over user's list of liked recipes
     return false;
   };
 
-  //Adds recipe
   likeRecipe = () => {
-    console.log("liked");
     this.setState(prevState => {
       return {
         recipeId: prevState.recipeId,
@@ -72,9 +99,7 @@ class DetailPage extends React.Component {
     });
   };
 
-  //Unlike Recipe
   unlikeRecipe = () => {
-    console.log("unlike");
     this.setState(prevState => {
       return {
         recipeId: prevState.recipeId,
@@ -140,7 +165,14 @@ class DetailPage extends React.Component {
           <p>{recipe && recipe.instructions}</p>
         </div>
         {this.renderLikeButton(this.state.isLiked)}
-        <RecipeLikes totalLikes={likes.totalLikes} likedBy={likes.likedBy} />
+        <RecipeDetailsLikes
+          totalLikes={recipeInteractions.totalLikes}
+          likedBy={recipeInteractions.likedBy}
+        />
+        <RecipeDetailsReviews
+          totalReviews={recipeInteractions.totalReviews}
+          reviews={recipeInteractions.reviews}
+        />
       </div>
     );
   };
