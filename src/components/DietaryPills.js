@@ -37,9 +37,23 @@ const DietaryPills = ({editing, dietaryRestrictions}) => {
             }
             {
                 editing && (
-                    <button className="btn-lg btn-success">
-                        <FontAwesomeIcon icon="plus"/>
-                    </button>
+                    <li className="list-group-item bg-success">
+                        <select className="form-control-sm">
+                            {
+                                diets.map(diet => {
+                                    if (!dietaryRestrictions.includes(diet)) {
+                                        return (
+                                            <option>{diet}</option>
+                                        )
+                                    }
+                                })
+                            }
+                            <option>Default select</option>
+                        </select>
+                        <button className="btn pl-3">
+                            <FontAwesomeIcon icon="plus"/>
+                        </button>
+                    </li>
                 )
             }
         </ul>
