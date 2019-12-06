@@ -5,8 +5,8 @@ class NavBar extends React.Component {
   render() {
     return (
       <div>
-        <nav class="navbar navbar-expand-sm navbar-light bg-light">
-          <Link to="/" class="navbar-brand" href="#">
+        <nav className="navbar navbar-expand-sm navbar-light bg-light">
+          <Link to="/" className="navbar-brand" href="#">
             App Name
           </Link>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
