@@ -9,6 +9,7 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import HomePageLikesFeed from "../components/HomePageLikesFeed";
 import HomePageReviewsFeed from "../components/HomePageReviewsFeed";
+import PrivacyPolicyMessage from "../components/PrivacyPolicyMessage";
 
 //Pages
 import DetailPage from "../pages/DetailPage";
@@ -117,26 +118,16 @@ class HomePage extends React.Component {
   renderPolicyMessage = () => {
     if (!this.state.hidePolicyMessage) {
       return (
-        <div className="alert alert-info" role="alert">
-          <h6>
-            Remember to review our
-            <Link to="/privacy-policy"> privacy policy</Link>!
-          </h6>
-          <button
-            type="button"
-            className="btn btn-info"
-            onClick={() => {
-              this.setState(prevState => {
-                return {
-                  ...prevState,
-                  hidePolicyMessage: true
-                };
-              });
-            }}
-          >
-            Hide Message
-          </button>
-        </div>
+        <PrivacyPolicyMessage
+          hide={() => {
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                hidePolicyMessage: true
+              };
+            });
+          }}
+        />
       );
     }
   };
