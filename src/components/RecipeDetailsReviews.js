@@ -67,7 +67,7 @@ class RecipeDetailsReview extends React.Component {
 
   renderDeleteButton(authorId, reviewId) {
     const delButton = (
-      <button onClick={() => this.deleteReview(reviewId)}>Delete</button>
+      <button className="btn btn-danger" onClick={() => this.deleteReview(reviewId)}>Delete</button>
     );
 
     if (this.props.isLoggedIn) {

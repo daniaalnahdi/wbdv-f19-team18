@@ -25,7 +25,7 @@ class RecipeDetailsReviewForm extends React.Component {
               onChange={e => this.props.updateBody(e.target.value)}
             ></textarea>
           </div>
-          <button
+          <button className="btn btn-primary"
             onClick={e => {
               e.preventDefault();
               this.props.createReview();
