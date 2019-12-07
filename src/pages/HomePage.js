@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import SearchPageContainer from "../containers/SearchPageContainer";
 import React from "react";
@@ -109,14 +109,44 @@ class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: LoggedIn
+      isLoggedIn: LoggedIn,
+      hidePolicyMessage: false
     };
   }
+
+  renderPolicyMessage = () => {
+    if (!this.state.hidePolicyMessage) {
+      return (
+        <div className="alert alert-info" role="alert">
+          <h6>
+            Remember to review our
+            <Link to="/privacy-policy"> privacy policy</Link>!
+          </h6>
+          <button
+            type="button"
+            className="btn btn-info"
+            onClick={() => {
+              this.setState(prevState => {
+                return {
+                  ...prevState,
+                  hidePolicyMessage: true
+                };
+              });
+            }}
+          >
+            Hide Message
+          </button>
+        </div>
+      );
+    }
+  };
+
   render() {
     return (
       <div>
         <Router>
           <NavBar></NavBar>
+          {this.renderPolicyMessage()}
           <Switch>
             <Route path="/login">
               <LoginPage />
