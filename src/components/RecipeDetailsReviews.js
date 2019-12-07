@@ -11,8 +11,8 @@ class RecipeDetailsReview extends React.Component {
         recipeId: this.props.recipeId,
         name: this.props.user.name,
         username: this.props.user.username,
-        heading: " ",
-        body: " "
+        heading: '',
+        body: ''
       }
     };
   }
