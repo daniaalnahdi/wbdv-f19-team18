@@ -156,9 +156,9 @@ class DetailPage extends React.Component {
         <RecipeDetailsLikes likedBy={recipeInteractions.likedBy} />
         <RecipeDetailsReviews
           isLoggedIn={this.props.isLoggedIn}
-          admin={this.props.user.admin}
-          userId={this.props.user.userId}
+          user={this.props.user}
           reviews={recipeInteractions.reviews}
+          recipeId={this.state.recipeId}
         />
       </div>
     );
