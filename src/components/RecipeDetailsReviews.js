@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import RecipeDetailsReviewForm from "./RecipeDetailsReviewForm";
 
 class RecipeDetailsReview extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class RecipeDetailsReview extends React.Component {
   }
 
   updateNewReviewHeading(heading) {
+    console.log(heading);
     this.setState(prevState => {
       return {
         ...prevState,
@@ -110,36 +112,13 @@ class RecipeDetailsReview extends React.Component {
               })}
           </ul>
           {this.props.isLoggedIn && (
-            <div className="border">
-              <h4>Leave a Review</h4>
-              <form>
-                <div class="form-group">
-                  <label for="title">Title</label>
-                  <input
-                    className="form-control"
-                    placeholder="Your review title here..."
-                    value={this.state.newReview.heading}
-                    onChange={e => this.updateNewReviewHeading(e.target.value)}
-                  />
-                  <label for="body">Message Body</label>
-                  <textarea
-                    className="form-control"
-                    rows="3"
-                    placeholder="Write your review here..."
-                    value={this.state.newReview.body}
-                    onChange={e => this.updateNewReviewBody(e.target.value)}
-                  ></textarea>
-                </div>
-                <button
-                  onClick={e => {
-                    e.preventDefault();
-                    this.createReview();
-                  }}
-                >
-                  Post
-                </button>
-              </form>
-            </div>
+            <RecipeDetailsReviewForm
+              heading={this.state.newReview.heading}
+              body={this.state.newReview.body}
+              updateHeading={heading => this.updateNewReviewHeading(heading)}
+              updateBody={body => this.updateNewReviewBody(body)}
+              createReview={() => this.createReview()}
+            />
           )}
         </div>
       </div>
