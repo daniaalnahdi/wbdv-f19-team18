@@ -18,7 +18,6 @@ class RecipeDetailsReview extends React.Component {
   }
 
   updateNewReviewHeading(heading) {
-    console.log(heading);
     this.setState(prevState => {
       return {
         ...prevState,
