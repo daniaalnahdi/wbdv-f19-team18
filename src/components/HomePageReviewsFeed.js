@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default class HomePageReviewsFeed extends React.Component {
-
   render() {
     let loginPrompt = "";
 
@@ -15,7 +14,7 @@ export default class HomePageReviewsFeed extends React.Component {
       <div className="border">
         <h3>
           {this.props.isLoggedIn
-            ? "Recently Liked By Friends"
+            ? "Recently Reviewed By Friends"
             : "Recently Reviewed"}
         </h3>
         {loginPrompt}
