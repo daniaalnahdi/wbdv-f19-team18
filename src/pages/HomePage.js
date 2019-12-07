@@ -115,29 +115,22 @@ class HomePage extends React.Component {
     };
   }
 
-  renderPolicyMessage = () => {
-    if (!this.state.hidePolicyMessage) {
-      return (
-        <PrivacyPolicyMessage
-          hide={() => {
-            this.setState(prevState => {
-              return {
-                ...prevState,
-                hidePolicyMessage: true
-              };
-            });
-          }}
-        />
-      );
-    }
-  };
-
   render() {
     return (
       <div>
         <Router>
           <NavBar></NavBar>
-          {this.renderPolicyMessage()}
+          <PrivacyPolicyMessage
+            hidden={this.state.hidePolicyMessage}
+            hide={() => {
+              this.setState(prevState => {
+                return {
+                  ...prevState,
+                  hidePolicyMessage: true
+                };
+              });
+            }}
+          />
           <Switch>
             <Route path="/login">
               <LoginPage />
