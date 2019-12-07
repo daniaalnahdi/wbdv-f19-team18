@@ -25,17 +25,7 @@ const recipeInteractions = {
         userId: 123
       },
       heading: "Review 1",
-      body: "Yum",
-      replies: [
-        {
-          user: {
-            name: "User 2",
-            username: "username2",
-            userId: 234
-          },
-          body: "I agree"
-        }
-      ]
+      body: "Yum"
     },
     {
       reviewId: 2,
@@ -45,8 +35,7 @@ const recipeInteractions = {
         userId: 234
       },
       heading: "Review 2",
-      body: "Good",
-      replies: []
+      body: "Good"
     }
   ]
 };

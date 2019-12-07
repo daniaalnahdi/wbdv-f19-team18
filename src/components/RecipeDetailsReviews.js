@@ -25,6 +25,10 @@ class RecipeDetailsReview extends React.Component {
     //if not logged in, don't add delete button at all
   }
 
+  createReview(reviewId) {}
+
+  deleteReview(reviewId) {}
+
   render() {
     return (
       <div className="border">
@@ -44,7 +48,7 @@ class RecipeDetailsReview extends React.Component {
                   </Link>
                   <p>{review.body}</p>
                   {this.renderDeleteButton(review.user.userId)}
-                  <ul>
+                  {/* <ul>
                     {review.replies &&
                       review.replies.map(reply => {
                         return (
@@ -56,7 +60,7 @@ class RecipeDetailsReview extends React.Component {
                           </li>
                         );
                       })}
-                  </ul>
+                  </ul> */}
                 </li>
               );
             })}
