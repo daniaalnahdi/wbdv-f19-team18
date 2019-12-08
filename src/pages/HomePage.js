@@ -162,7 +162,7 @@ class HomePage extends React.Component {
               )}
             />
             <Route
-              path="/profile/:id"
+              path="/profile/:id?"
               render={props => <ProfilePage userId={props.match.params.id} />}
             />
             <Route path="/">
