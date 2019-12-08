@@ -7,8 +7,12 @@ export default class SearchPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchName: this.props.searchName
+            serachName:''
+            // searchName: this.props.match.params.searchName
+            //searchName: this.props.searchName
         }
+        //console.log(this.state.searchName)
+        // this.props.searchRecipeByName(this.state.searchName)
     }
 
     searchNameChanged = event =>
