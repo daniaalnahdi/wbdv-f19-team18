@@ -17,9 +17,10 @@ class NavBar extends React.Component {
               <Link to="/search" className="nav-item nav-link">
                 Search
               </Link>
+              {!this.props.isLoggedIn &&
               <Link to="/login" className="nav-item nav-link">
                 Login
-              </Link>
+              </Link>}
               {this.props.isLoggedIn && (
                 <Link to="/profile/:id" className="nav-item nav-link">
                   Profile

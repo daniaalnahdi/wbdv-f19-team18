@@ -104,7 +104,7 @@ const loggedInUser = {
 };
 
 // TODO -- check if user is actually logged in
-const LoggedIn = true;
+const LoggedIn = false;
 
 const store = createStore(SearchPageReducer);
 
