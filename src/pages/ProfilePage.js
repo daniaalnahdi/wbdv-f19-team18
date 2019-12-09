@@ -7,7 +7,15 @@ const dummyUser = {
     followers: [],
     following: [],
     email: "swilson234@example.com",
-    dietaryRestrictions: ["vegan", "whole30"]
+    dietaryRestrictions: ["vegan", "whole30"],
+    likedRecipes: [
+        {
+            title: "Indian Potato Curry",
+            readyInMinutes: 40,
+            servings: 4,
+            image: "https://spoonacular.com/recipeImages/six-ingredient-indian-potato-curry-849494.jpg"
+        }
+    ]
 };
 
 class ProfilePage extends React.Component {
@@ -16,7 +24,7 @@ class ProfilePage extends React.Component {
         super(props);
         this.state = {
             user: dummyUser,
-            editing: true,
+            editing: false,
             relation: {
                 owner: true,
                 following: false
@@ -61,14 +69,14 @@ class ProfilePage extends React.Component {
 
     sensitiveInfo = () => {
         if (!this.state.relation.owner) {
-            return(<div/>);
+            return(<br/>);
         } else {
             return (
                 <div>
                     <br/>
                     <h3>{this.state.user.email}</h3>
                     <br/>
-                    <h3>Dietary Restrictions:</h3>
+                    <h2>Dietary Restrictions:</h2>
                     <DietaryPills editing={this.state.editing}
                                   dietaryRestrictions={this.state.user.dietaryRestrictions}/>
                     <br/>
@@ -80,7 +88,7 @@ class ProfilePage extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <div className="row">
+                <div className="row m-2">
                     <h1>{this.state.user.firstName} {this.state.user.lastName}</h1>
                     <div className="col-1"/>
                     <div className="float-right">
@@ -94,6 +102,8 @@ class ProfilePage extends React.Component {
                 {
                     this.sensitiveInfo()
                 }
+                <h2>Liked Recipes:</h2>
+
             </div>
         );
     }

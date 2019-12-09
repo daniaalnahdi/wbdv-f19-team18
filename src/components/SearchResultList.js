@@ -10,7 +10,7 @@ const SearchResultList = ({recipes}) => {
                     recipes && recipes.map(recipe => {
                         return (
                             <Link key={recipe.id}
-                                  to={`./recipe/${recipe.id}`}>
+                                  to={`/recipe/${recipe.id}`}>
                                 <li className="list-group-item">
                                     <SearchResultItem recipe={recipe}/>
                                 </li>
