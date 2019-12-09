@@ -1,5 +1,6 @@
 import React from "react";
 import DietaryPills from "../components/DietaryPills";
+import ProfileLoginMessage from "../components/ProfileLoginMessage";
 const dummyUser = {
     firstName: "Sammy",
     lastName: "Wilson",
@@ -86,6 +87,7 @@ class ProfilePage extends React.Component {
     };
 
     render() {
+        if (this.props.isLoggedIn) {
         return (
             <div className="container-fluid">
                 <div className="row m-2">
@@ -106,6 +108,11 @@ class ProfilePage extends React.Component {
 
             </div>
         );
+            } else {
+                return (
+                    <ProfileLoginMessage/>
+                )
+            }
     }
 }
 

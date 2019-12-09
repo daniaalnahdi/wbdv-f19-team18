@@ -18,6 +18,7 @@ import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "./ProfilePage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
 import RecipeEditor from "./RecipeEditor";
+import ProfileLoginMessage from "../components/ProfileLoginMessage";
 
 //TODO - use real data
 
@@ -103,7 +104,7 @@ const loggedInUser = {
 };
 
 // TODO -- check if user is actually logged in
-const LoggedIn = true;
+const LoggedIn = false;
 
 const store = createStore(SearchPageReducer);
 
@@ -120,7 +121,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <Router>
-          <NavBar></NavBar>
+          <NavBar isLoggedIn={this.state.isLoggedIn}></NavBar>
           <PrivacyPolicyMessage
             hidden={this.state.hidePolicyMessage}
             hide={() => {
@@ -167,8 +168,10 @@ class HomePage extends React.Component {
               render={props => <ProfilePage userId={props.match.params.id} />}
             />
             <Route
-                path="/editor"
-                render = {props => <RecipeEditor {...props}/>}
+              path="/editor"
+              render={props => (
+                <RecipeEditor {...props} isLoggedIn={this.state.isLoggedIn} />
+              )}
             />
             <Route exact path="/">
               <HomePageLikesFeed

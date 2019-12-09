@@ -20,6 +20,16 @@ class NavBar extends React.Component {
               <Link to="/login" className="nav-item nav-link" href="#">
                 Login
               </Link>
+              {this.props.isLoggedIn && (
+                <Link to="/profile/:id" className="nav-item nav-link" href="#">
+                  Profile
+                </Link>
+              )}
+              {!this.props.isLoggedIn && (
+                <Link to="/profile" className="nav-item nav-link" href="#">
+                  Profile
+                </Link>
+              )}
             </div>
           </div>
         </nav>
