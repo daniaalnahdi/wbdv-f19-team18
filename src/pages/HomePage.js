@@ -104,7 +104,7 @@ const loggedInUser = {
 };
 
 // TODO -- check if user is actually logged in
-const LoggedIn = false;
+const LoggedIn = true;
 
 const store = createStore(SearchPageReducer);
 
@@ -137,7 +137,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <Router>
-          <NavBar isLoggedIn={this.state.isLoggedIn}></NavBar>
+          <NavBar isLoggedIn={this.state.isLoggedIn} user={this.state.isLoggedIn ? loggedInUser : null}></NavBar>
           <PrivacyPolicyMessage
             hidden={this.state.hidePolicyMessage}
             hide={() => {

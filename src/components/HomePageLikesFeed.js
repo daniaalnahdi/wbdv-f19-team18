@@ -1,9 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {withRouter} from 'react-router';
+import { withRouter } from "react-router";
 
 class HomePageLikesFeed extends React.Component {
-
   render() {
     let loginPrompt = "";
 
@@ -29,7 +28,7 @@ class HomePageLikesFeed extends React.Component {
                     {like.user.name}
                   </Link>
                   Liked
-                  <Link to={`/recipe/${like.recipeId}`}>
+                  <Link to={`/details/${like.recipeId}`}>
                     {like.recipeTitle}
                   </Link>
                 </li>
@@ -41,4 +40,4 @@ class HomePageLikesFeed extends React.Component {
   }
 }
 
-export default withRouter(HomePageLikesFeed)
+export default withRouter(HomePageLikesFeed);
