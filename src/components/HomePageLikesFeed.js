@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {withRouter} from 'react-router';
 
-export default class HomePageLikesFeed extends React.Component {
+class HomePageLikesFeed extends React.Component {
 
   render() {
     let loginPrompt = "";
@@ -39,3 +40,5 @@ export default class HomePageLikesFeed extends React.Component {
     );
   }
 }
+
+export default withRouter(HomePageLikesFeed)
