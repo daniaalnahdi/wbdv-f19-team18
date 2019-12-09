@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import SearchPageContainer from "../containers/SearchPageContainer";
 import React from "react";
@@ -118,6 +118,22 @@ class HomePage extends React.Component {
   }
 
   render() {
+    let homePageMessage = "";
+    let loginPrompt = (
+      <h4>
+        <Link to="login">Login</Link> to see your friends' recent likes and
+        comments!
+      </h4>
+    );
+    let userGreeting = <h4>Welcome back, {loggedInUser.name}</h4>;
+
+    homePageMessage = (
+      <div>
+        <h2>Hi!</h2>
+        {this.state.isLoggedIn ? userGreeting : loginPrompt}
+      </div>
+    );
+
     return (
       <div>
         <Router>
@@ -174,6 +190,7 @@ class HomePage extends React.Component {
               )}
             />
             <Route exact path="/">
+              {homePageMessage}
               <HomePageLikesFeed
                 isLoggedIn={this.state.isLoggedIn}
                 likes={
