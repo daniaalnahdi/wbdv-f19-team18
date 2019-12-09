@@ -17,6 +17,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "./ProfilePage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
+import RecipeEditor from "./RecipeEditor";
 
 //TODO - use real data
 
@@ -164,6 +165,10 @@ class HomePage extends React.Component {
             <Route
               path="/profile/:id?"
               render={props => <ProfilePage userId={props.match.params.id} />}
+            />
+            <Route
+                path="/editor"
+                render = {props => <RecipeEditor {...props}/>}
             />
             <Route exact path="/">
               <HomePageLikesFeed
