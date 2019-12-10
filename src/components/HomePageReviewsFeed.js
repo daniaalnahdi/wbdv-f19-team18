@@ -15,10 +15,9 @@ export default class HomePageReviewsFeed extends React.Component {
         <div className=" list-group-item">
           <h3>
             {this.props.isLoggedIn
-              ? "Recent Comments By Friends"
-              : "Recent Comments By Who You Follow"}
+              ? "Recent Comments By Who You Follow"
+              : "Recent Comments By Everyone"}
           </h3>
-          {loginPrompt}
           <ul className="list-group">
             {this.props.reviews &&
               this.props.reviews.map(review => {
