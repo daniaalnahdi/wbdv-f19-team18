@@ -6,20 +6,36 @@ class NavBar extends React.Component {
     return (
       <div>
         <nav className="navbar navbar-expand-sm navbar-light bg-light">
-          <Link to="/" className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand">
             App Name
           </Link>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
-              <Link to="/" className="nav-item nav-link" href="#">
+              <Link to="/" className="nav-item nav-link">
                 Home
               </Link>
-              <Link to="/search" className="nav-item nav-link" href="#">
+              <Link to="/search" className="nav-item nav-link">
                 Search
               </Link>
-              <Link to="/login" className="nav-item nav-link" href="#">
+              {!this.props.isLoggedIn &&
+              <Link to="/login" className="nav-item nav-link">
                 Login
-              </Link>
+              </Link>}
+              {this.props.isLoggedIn && (
+                <Link to="/profile/:id" className="nav-item nav-link">
+                  Profile
+                </Link>
+              )}
+              {!this.props.isLoggedIn && (
+                <Link to="/profile" className="nav-item nav-link">
+                  Profile
+                </Link>
+              )}
+              {this.props.isLoggedIn && (
+                <Link to="/profile" className="nav-link disabled">
+                  Logged In As {this.props.user.name}
+                </Link>
+              )}
             </div>
           </div>
         </nav>

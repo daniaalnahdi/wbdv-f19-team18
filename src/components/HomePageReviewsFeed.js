@@ -27,7 +27,7 @@ export default class HomePageReviewsFeed extends React.Component {
                     {review.user.name}
                   </Link>
                   Reviewed
-                  <Link to={`/recipe/${review.recipeId}`}>
+                  <Link to={`/details/${review.recipeId}`}>
                     {review.recipeTitle}
                   </Link>
                 </li>
