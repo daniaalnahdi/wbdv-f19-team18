@@ -43,11 +43,11 @@ import RecipeDetailsComments from "../components/RecipeDetailsComments";
 class DetailPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.recipeId);
+    console.log("user:", this.props.user);
     this.state = {
       recipeId: this.props.recipeId,
       recipe: null,
-      liked: this.isLiked()
+      liked: false
     };
   }
 
@@ -68,7 +68,7 @@ class DetailPage extends React.Component {
                 return {
                   recipeId: prevState.recipeId,
                   recipe: recipe,
-                  isLiked: prevState.isLiked
+                  isLiked: this.isLiked()
                 };
               });
             });
@@ -78,7 +78,7 @@ class DetailPage extends React.Component {
             return {
               recipeId: prevState.recipeId,
               recipe: recipe,
-              isLiked: prevState.isLiked
+              isLiked: this.isLiked()
             };
           });
         }
@@ -99,9 +99,9 @@ class DetailPage extends React.Component {
   /* LIKE FUNCTIONALITY */
   //TODO check if the recipe has been liked
   isLiked = () => {
-    if (this.props.isLoggedIn) {
+    if (this.props.isLoggedIn && this.props.user.likedRecipes) {
       this.props.user.likedRecipes.forEach(recipe => {
-        if (recipe.id === this.state.recipeId) {
+        if (recipe.id === this.state.recipeId || recipe.id === this.state.recipeId) {
           return true;
         }
       });
@@ -110,7 +110,8 @@ class DetailPage extends React.Component {
   };
 
   likeRecipe = () => {
-    this.props.likeRecipe(this.props.user.id, this.state.recipeId);
+    console.log(this.props.user._id, this.state.recipeId);
+    this.props.likeRecipe(this.props.user._id, this.state.recipeId);
     this.setState(prevState => {
       return {
         recipeId: prevState.recipeId,
@@ -121,7 +122,7 @@ class DetailPage extends React.Component {
   };
 
   unlikeRecipe = () => {
-    this.props.unlikeRecipe(this.props.user.id, this.state.recipeId);
+    this.props.unlikeRecipe(this.props.user._id, this.state.recipeId);
     this.setState(prevState => {
       return {
         recipeId: prevState.recipeId,

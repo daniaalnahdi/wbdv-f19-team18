@@ -63,7 +63,7 @@ export default class RecipeService {
   };
 
   updateRecipe = (id, recipe) => {
-      return fetch(`${rootUrl}/recipes${id}`, {
+      return fetch(`${rootUrl}/recipes/${id}`, {
           method: 'PUT',
           headers: {
               'Content-Type': 'application/json'
@@ -74,17 +74,17 @@ export default class RecipeService {
   };
 
   likeRecipe = (userId, recipeId) => {
-      return fetch(`${rootUrl}/recipes${recipeId}?likedBy=${userId}`, { method: 'PUT' })
+      return fetch(`${rootUrl}/recipes/${recipeId}?likedBy=${userId}`, { method: 'PUT' })
           .then(response => response.json());
   };
 
   unlikeRecipe = (userId, recipeId) => {
-      return fetch(`${rootUrl}/recipes${recipeId}?unlikedBy=${userId}`, { method: 'PUT' })
+      return fetch(`${rootUrl}/recipes/${recipeId}?unlikedBy=${userId}`, { method: 'PUT' })
           .then(response => response.json());
   };
 
   deleteRecipe = id => {
-      return fetch(`${rootUrl}/recipes${id}`, { method: 'DELETE' })
+      return fetch(`${rootUrl}/recipes/${id}`, { method: 'DELETE' })
           .then(response => response.json());
   };
 }
