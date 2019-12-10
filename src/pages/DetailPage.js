@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import RecipeService from "../service/RecipeService";
 import RecipeDetailsLikes from "../components/RecipeDetailsLikes";
-import RecipeDetailsReviews from "../components/RecipeDetailsComments";
+import RecipeDetailsComments from "../components/RecipeDetailsComments";
 
 const recipeInteractions = {
   likedBy: [
@@ -168,7 +168,7 @@ class DetailPage extends React.Component {
         </div>
         {this.renderLikeButton()}
         <RecipeDetailsLikes likedBy={recipeInteractions.likedBy} />
-        <RecipeDetailsReviews
+        <RecipeDetailsComments
           isLoggedIn={this.props.isLoggedIn}
           user={this.props.user}
           reviews={recipeInteractions.reviews}

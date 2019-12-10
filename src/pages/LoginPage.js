@@ -43,13 +43,31 @@ export default class LoginPage extends React.Component {
       this.setState(prevState => {
         return {
           ...prevState,
-          error: ''
+          error: ""
         };
       });
     }
   }
 
+  loginUser() {
+    this.validate();
+
+    this.props.login(this.state.username, this.state.password);
+
+    if (this.props.user === null) {
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          error: "Incorrect username or password."
+        };
+      });
+    } else {
+      this.props.loginUser(this.props.user);
+    }
+  }
+
   render() {
+    console.log(this.state);
     return (
       <div class="container-fluid">
         <h1>Login</h1>
@@ -93,7 +111,7 @@ export default class LoginPage extends React.Component {
                 type="button"
                 className="btn btn-primary btn-block"
                 onClick={() => {
-                  this.validate();
+                  this.loginUser();
                 }}
               >
                 Sign in
