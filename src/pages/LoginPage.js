@@ -61,13 +61,18 @@ export default class LoginPage extends React.Component {
           error: "Incorrect username or password."
         };
       });
+    } else if (this.props.user === '') {
+      //nothing
+
     } else {
+      //send info to homepage to populate data
       this.props.loginUser(this.props.user);
     }
+
+    
   }
 
   render() {
-    console.log(this.state);
     return (
       <div class="container-fluid">
         <h1>Login</h1>

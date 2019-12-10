@@ -1,5 +1,5 @@
 const initialState = {
-  user: null
+  user: ''
 };
 
 const LoginPageReducer = (state = initialState, action) => {

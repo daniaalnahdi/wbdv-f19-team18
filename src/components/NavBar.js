@@ -7,7 +7,7 @@ class NavBar extends React.Component {
       <div>
         <nav className="navbar navbar-expand-sm navbar-light bg-light">
           <Link to="/" className="navbar-brand">
-            App Name
+            Recipe Hunt
           </Link>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">

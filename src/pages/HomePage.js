@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import SearchPageContainer from "../containers/SearchPageContainer";
 import LoginPageContainer from "../containers/LoginPageContainer";
+import DetailPageContainer from "../containers/DetailPageContainer";
 import React from "react";
 import { createStore } from "redux";
 import SearchPageReducer from "../reducers/SearchPageReducer";
 import EditorPageReducer from "../reducers/EditorPageReducer";
 import EditorPageContainer from "../containers/EditorPageContainer";
 import LoginPageReducer from "../reducers/LoginPageReducer";
+import DetailPageReducer from "../reducers/LoginPageReducer";
 //UI Elements
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -110,8 +112,8 @@ const loggedInUser = {
 
 const searchStore = createStore(SearchPageReducer);
 const loginStore = createStore(LoginPageReducer);
-
-const editorPageStore = createStore(EditorPageReducer)
+const detailStore = createStore(DetailPageReducer);
+const editorPageStore = createStore(EditorPageReducer);
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -126,6 +128,7 @@ class HomePage extends React.Component {
   }
 
   loginUser(user) {
+    console.log(user);
     let admin = false;
 
     if (user.__v == 1) {
@@ -144,17 +147,19 @@ class HomePage extends React.Component {
   }
 
   render() {
+    let homePageDescription = <div className="container-fluid"><p>With Recipe Hunt, you can search, find, like, your favorite recipes! You can also interact with the members of our community in our recipe comments. Be sure to check out our exclusive Recipe Hunt recipes!</p></div>;
+
     let homePageMessage = "";
     let loginPrompt = (
-      <h4>
+      <h6>
         <Link to="login">Login</Link> to see your friends' recent likes and
         comments!
-      </h4>
+      </h6>
     );
     let userGreeting = <h4>Welcome back, {this.state.userFirstName}</h4>;
 
     homePageMessage = (
-      <div>
+      <div className="container-fluid">
         <h2>Hi!</h2>
         {this.state.isLoggedIn ? userGreeting : loginPrompt}
       </div>
@@ -210,11 +215,14 @@ class HomePage extends React.Component {
             <Route
               path="/details/:id"
               render={props => (
-                <DetailPage
-                  recipeId={props.match.params.id}
-                  isLoggedIn={this.state.isLoggedIn}
-                  user={this.state.user}
-                />
+                <Provider store={detailStore}>
+                  <DetailPageContainer
+                    recipeId={props.match.params.id}
+                    isLoggedIn={this.state.isLoggedIn}
+                    user={this.state.user}
+                    admin={this.state.admin}
+                  />
+                </Provider>
               )}
             />
             <Route
@@ -229,23 +237,23 @@ class HomePage extends React.Component {
             <Route
               path="/editor/:recipeId?"
               render={props => (
-                  //<Provider store={editorPageStore}>
-                    <EditorPage {...props}/>
-                  //</Provider>
+                //<Provider store={editorPageStore}>
+                <EditorPage {...props} />
+                //</Provider>
                 // <EditorPage {...props} isLoggedIn={this.state.isLoggedIn} />
               )}
             />
             <Route
-                path="/localRecipes"
-
-                render={props => (
-                   // <Provider store={editorPageStore}>
-                      <LocalRecipePage/>
-                   // </Provider>
-                )}
+              path="/localRecipes"
+              render={props => (
+                // <Provider store={editorPageStore}>
+                <LocalRecipePage />
+                // </Provider>
+              )}
             />
             <Route exact path="/">
               {homePageMessage}
+              {homePageDescription}
               <HomePageLikesFeed
                 isLoggedIn={this.state.isLoggedIn}
                 likes={
