@@ -29,7 +29,6 @@ export default class localRecipeService {
      * @returns {Promise<any>}
      */
     findAllRecipes = () => {
-        /* return this.courses;*/
         return fetch(RECIPE_API_URL)
             .then(response => response.json());
     }
@@ -61,12 +60,12 @@ export default class localRecipeService {
     }
 
     /**
-     * Removes course whose id is courseId
-     * @param courseId
+     * Removes recipe whose id is recipeId
+     * @param recipeId
      * @returns {Promise<any>}
      */
-    deleteRecipe = (courseId) => {
-        return fetch(RECIPE_API_URL + `${courseId}`, {
+    deleteRecipe = (recipeId) => {
+        return fetch(RECIPE_API_URL + `${recipeId}`, {
             method: 'DELETE'
         }).then(response => response.json())
     }

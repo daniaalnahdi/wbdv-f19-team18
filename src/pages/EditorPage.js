@@ -44,6 +44,20 @@ class EditorPage extends React.Component {
             imageUrl: event.target.value
         })
 
+    createRecipe = recipe =>{
+        console.log(recipe)
+        // fetch("http://localhost:8080/api/reviews", {
+        //     method: 'post',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(recipe)
+        // }).then(response => response.json())
+        //     .then(review => console.log(review))
+
+    }
+
+
 
     render = () => {
         return (
@@ -130,14 +144,14 @@ class EditorPage extends React.Component {
                     </div>
                     <div className="form-group row">
                         <button
-                        //     onClick={()=> this.props.createRecipe({
-                        //     recipeName: this.state.recipeName,
-                        //     prepTime: this.state.prepTime,
-                        //     cookTime: this.state.cookTime,
-                        //     servings: this.state.servings,
-                        //     instructions: this.state.instructions,
-                        //     imageUrl: this.state.imageUrl
-                        // })}
+                            onClick={()=> this.createRecipe({
+                            recipeName: this.state.recipeName,
+                            prepTime: this.state.prepTime,
+                            cookTime: this.state.cookTime,
+                            servings: this.state.servings,
+                            instructions: this.state.instructions,
+                            imageUrl: this.state.imageUrl
+                        })}
                             className="form-control btn btn-primary">
                             Add Recipe
                         </button>

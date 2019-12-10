@@ -4,6 +4,8 @@ import SearchPageContainer from "../containers/SearchPageContainer";
 import React from "react";
 import { createStore } from "redux";
 import SearchPageReducer from "../reducers/SearchPageReducer";
+import EditorPageReducer from "../reducers/EditorPageReducer";
+import EditorPageContainer from "../containers/EditorPageContainer";
 //UI Elements
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -108,6 +110,8 @@ const LoggedIn = true;
 
 const store = createStore(SearchPageReducer);
 
+const editorPageStore = createStore(EditorPageReducer)
+
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
@@ -194,7 +198,10 @@ class HomePage extends React.Component {
             <Route
               path="/editor"
               render={props => (
-                <EditorPage {...props} isLoggedIn={this.state.isLoggedIn} />
+                  <Provider store={editorPageStore}>
+                    <EditorPageContainer />
+                  </Provider>
+                // <EditorPage {...props} isLoggedIn={this.state.isLoggedIn} />
               )}
             />
             <Route exact path="/">
