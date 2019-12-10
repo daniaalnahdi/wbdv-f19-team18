@@ -1,62 +1,75 @@
 import React from "react";
+import localRecipeService from "../service/localRecipeService";
+
+const service = localRecipeService.getInstance()
 
 class EditorPage extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            recipeName: '',
-            prepTime: '',
-            cookTime: '',
-            servings: '',
-            instructions: '',
-            imageUrl: ''
+            // recipe: {
+                title: '',
+                preparationMinutes: '',
+                cookingMinutes: '',
+                readyInMinutes: '',
+                servings: '',
+                instructions: '',
+                image: '',
+                diets: '',
+                interactions: null
+            // }
         }
     }
 
     recipeNameUpdated = event =>
         this.setState({
-            recipeName: event.target.value
+            // recipe: {title: event.target.value}
+            title: event.target.value
         })
 
     prepTimeUpdated = event =>
         this.setState({
-            prepTime: event.target.value
+            // recipe: {preparationMinutes: event.target.value}
+            preparationMinutes: event.target.value
         })
 
     cookTimeUpdated = event =>
         this.setState({
-            cookTime: event.target.value
+            // recipe: {cookingMinutes: event.target.value}
+            cookingMinutes: event.target.value
         })
 
     servingsUpdated = event =>
         this.setState({
+            // recipe: {servings: event.target.value}
             servings: event.target.value
         })
 
     instructionsUpdated = event =>
         this.setState({
-            instructions: event.target.value
+            // recipe: {instructions: event.target.value}
+             instructions: event.target.value
         })
 
     imageUrlUpdated = event =>
         this.setState({
-            imageUrl: event.target.value
+            //recipe: {image: event.target.value}
+            image: event.target.value
         })
 
-    createRecipe = recipe =>{
+    createRecipe = recipe => {
         console.log(recipe)
-        // fetch("http://localhost:8080/api/reviews", {
-        //     method: 'post',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(recipe)
-        // }).then(response => response.json())
-        //     .then(review => console.log(review))
-
+        // console.log(JSON.stringify(recipe))
+        //service.createRecipe(recipe).then(recipe => console.log(recipe))
+        fetch("https://wbdv-t18-server-node.herokuapp.com/api/recipes", {
+            method: 'post',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(recipe)
+        }).then(response => console.log(response.json()))
     }
-
 
 
     render = () => {
@@ -69,7 +82,7 @@ class EditorPage extends React.Component {
                             Recipe Name
                         </label>
                         <div className="col-sm-10">
-                            <input value={this.state.recipeId}
+                            <input value={this.state.title}
                                    onChange={this.recipeNameUpdated}
                                    className="form-control"
                                    id="name"
@@ -82,7 +95,7 @@ class EditorPage extends React.Component {
                             Preparation Time
                         </label>
                         <div className="col-sm-10">
-                            <input value={this.state.prepTime}
+                            <input value={this.state.preparationMinutes}
                                    onChange={this.prepTimeUpdated}
                                    className="form-control"
                                    id="prepTime"
@@ -95,7 +108,7 @@ class EditorPage extends React.Component {
                             Cook Time
                         </label>
                         <div className="col-sm-10">
-                            <input value={this.state.cookTime}
+                            <input value={this.state.cookingMinutes}
                                    onChange={this.cookTimeUpdated}
                                    className="form-control"
                                    id="cookTime"
@@ -136,7 +149,7 @@ class EditorPage extends React.Component {
                             Image URL </label>
                         <div className="col-sm-10">
                             <input
-                                value={this.state.imageURL}
+                                value={this.state.image}
                                 onChange={this.imageUrlUpdated}
                                 className="form-control"
                                 placeholder="Image URL"/>
@@ -144,14 +157,19 @@ class EditorPage extends React.Component {
                     </div>
                     <div className="form-group row">
                         <button
-                            onClick={()=> this.createRecipe({
-                            recipeName: this.state.recipeName,
-                            prepTime: this.state.prepTime,
-                            cookTime: this.state.cookTime,
-                            servings: this.state.servings,
-                            instructions: this.state.instructions,
-                            imageUrl: this.state.imageUrl
-                        })}
+                            onClick={() => this.createRecipe({
+                                // recipe: {
+                                    title: this.state.title,
+                                    preparationMinutes: this.state.preparationMinutes,
+                                    cookingMinutes: this.state.cookingMinutes,
+                                    readyInMinutes: this.state.readyInMinutes,
+                                    servings: this.state.servings,
+                                    instructions: this.state.instructions,
+                                    image: this.state.image,
+                                    diet: this.state.diet,
+                                    interaction: this.state.interaction
+                                // }
+                            })}
                             className="form-control btn btn-primary">
                             Add Recipe
                         </button>

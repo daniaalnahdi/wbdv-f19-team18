@@ -1,4 +1,4 @@
-const RECIPE_API_URL = ``
+const RECIPE_API_URL = `https://wbdv-t18-server-node.herokuapp.com/api`
 
 export default class localRecipeService {
     static instance = null;
@@ -14,7 +14,7 @@ export default class localRecipeService {
      * @param recipe
      */
     createRecipe = (recipe) => {
-        return fetch(RECIPE_API_URL, {
+        return fetch(`${RECIPE_API_URL}/recipes`, {
             method: 'POST',
             body: JSON.stringify(recipe),
             headers: {
@@ -29,7 +29,7 @@ export default class localRecipeService {
      * @returns {Promise<any>}
      */
     findAllRecipes = () => {
-        return fetch(RECIPE_API_URL)
+        return fetch(`${RECIPE_API_URL}/recipes`)
             .then(response => response.json());
     }
 
@@ -39,7 +39,7 @@ export default class localRecipeService {
      * @returns {Promise<any>}
      */
     findRecipeById = (recipeId) => {
-        return fetch(RECIPE_API_URL + `${recipeId}`)
+        return fetch(`${RECIPE_API_URL}/recipes/${recipeId}`)
             .then(response => response.json());
     }
 
@@ -50,7 +50,7 @@ export default class localRecipeService {
      * @returns {Promise<any>}
      */
     updateRecipe(recipeId, newRecipe) {
-        return fetch(RECIPE_API_URL + `${recipeId}`, {
+        return fetch(`${RECIPE_API_URL}/recipes/${recipeId}`, {
             method: 'PUT',
             body: JSON.stringify(newRecipe),
             headers: {
@@ -65,7 +65,7 @@ export default class localRecipeService {
      * @returns {Promise<any>}
      */
     deleteRecipe = (recipeId) => {
-        return fetch(RECIPE_API_URL + `${recipeId}`, {
+        return fetch(`${RECIPE_API_URL}/recipes/${recipeId}`, {
             method: 'DELETE'
         }).then(response => response.json())
     }
