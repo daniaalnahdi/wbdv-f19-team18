@@ -17,7 +17,7 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "./ProfilePage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
-import RecipeEditor from "./RecipeEditor";
+import EditorPage from "./EditorPage";
 import ProfileLoginMessage from "../components/ProfileLoginMessage";
 
 //TODO - use real data
@@ -194,7 +194,7 @@ class HomePage extends React.Component {
             <Route
               path="/editor"
               render={props => (
-                <RecipeEditor {...props} isLoggedIn={this.state.isLoggedIn} />
+                <EditorPage {...props} isLoggedIn={this.state.isLoggedIn} />
               )}
             />
             <Route exact path="/">
