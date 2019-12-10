@@ -5,10 +5,10 @@ export default class PrivacyPolicyPage extends React.Component {
     return (
       <div className="container-fluid">
         <h1>Privacy Policy</h1>
-        <p>Recipe Hunter values itself in creating a fun and safe community. This privacy policy outlines how we use and protect your data.</p>
+        <p>Recipe Hunt values itself in creating a fun and safe community. This privacy policy outlines how we use and protect your data.</p>
         <ul>
         <li>We implemented security measures to prevent the misuse of your personal information and data, and to prevent anuthorized access to your account. </li>
-        <li>The only ads that we run are from authorized Recipe Hunter sellers; we do not share your data with third-party marketing services, and do not track your devices for marketing purposes.</li>
+        <li>The only ads that we run are from authorized Recipe Hunt sellers; we do not share your data with third-party marketing services, and do not track your devices for marketing purposes.</li>
         </ul>
         <br/>
 
