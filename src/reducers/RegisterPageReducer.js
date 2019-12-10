@@ -17,4 +17,4 @@ const RegisterPageReducer = (state = initialState, action) => {
   }
 };
 
-export default LoginPageReducer;
+export default RegisterPageReducer;

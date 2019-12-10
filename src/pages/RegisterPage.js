@@ -3,6 +3,93 @@ import styles from "../css/RegisterPage.css";
 import { Link } from "react-router-dom";
 
 export default class RegisterPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      admin: false,
+      user: {
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        diets: [],
+      }
+  }
+}
+
+updateFirstName(first) {
+  this.setState(prevState => {
+    return {
+      ...prevState,
+      user: {
+        ...prevState,
+        firstName: first
+      }
+    };
+  });
+}
+
+updateLastName(last) {
+  this.setState(prevState => {
+    return {
+      ...prevState,
+      user: {
+        prevState,
+        lastName: last
+      }
+    };
+  });
+}
+
+updateUsername(username) {
+  this.setState(prevState => {
+    return {
+      ...prevState,
+      user: {
+        prevState,
+        username: username
+      }
+    };
+  });
+}
+
+updatePassword(password) {
+  this.setState(prevState => {
+    return {
+      ...prevState,
+      user: {
+        prevState,
+        password: password
+      }
+    };
+  });
+}
+
+updateAdmin(admin) {
+  this.setState(prevState => {
+    return {
+      admin: admin,
+      user: {
+        ...prevState,
+      }
+    };
+  });
+}
+
+updateDiet(diet) {
+  this.setState(prevState => {
+    return {
+      ...prevState,
+      user: {
+        ...prevState.user,
+        diets: [...prevState.diets, diet]
+      }
+    };
+  });
+
+  console.log(this.state)
+}
+
   render() {
     return (
       <div class="container-fluid">
@@ -58,19 +145,6 @@ export default class RegisterPage extends React.Component {
             </div>
           </div>
           <div class="form-group row">
-            <label for="verifyPasswordFld" class="col-sm-2 col-form-label">
-              Verify Password
-            </label>
-            <div class="col-sm-10">
-              <input
-                type="password"
-                className="form-control"
-                id="verifyPasswordFld"
-                placeholder="123qwe#$%"
-              />
-            </div>
-          </div>
-          <div class="form-group row">
             <label className="col-sm-2 col-form-label">User Role?</label>
             <div class="col-sm-10">
               <input
@@ -90,6 +164,7 @@ export default class RegisterPage extends React.Component {
                 type="checkbox"
                 className={styles.checkbox + "form-check-input checkbox"}
                 id="veg"
+                onChange={(e) => {if (e.target.checked) {this.updateDiet("Vegetarian")}}}
               />
               <label className="form-check-label" for="veg">
                 Vegetarian

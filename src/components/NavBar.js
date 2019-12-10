@@ -36,7 +36,12 @@ class NavBar extends React.Component {
                   Create Recipe
                 </Link>
               )}
-              {this.props.isLoggedIn && (
+              {this.props.isLoggedIn && !this.props.admin && (
+                <Link to="/profile" className="nav-link disabled">
+                  Logged In As {this.props.user.firstName} {this.props.user.lastName}
+                </Link>
+              )}
+              {this.props.isLoggedIn && this.props.admin && (
                 <Link to="/profile" className="nav-link disabled">
                   Logged In As {this.props.user.firstName} {this.props.user.lastName} (Admin)
                 </Link>
