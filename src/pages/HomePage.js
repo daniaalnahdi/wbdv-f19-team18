@@ -238,6 +238,7 @@ class HomePage extends React.Component {
               render={props => (
                 <ProfilePage
                   userId={props.match.params.id}
+                  user={this.state.user}
                   isLoggedIn={this.state.isLoggedIn}
                 />
               )}
