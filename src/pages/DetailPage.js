@@ -52,18 +52,29 @@ class DetailPage extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("Component did mount");
-    console.log(this.state.recipeId);
+    console.log("detail page Component did mount", this.state.recipeId);
     if (!this.state.recipe) {
       const recipeService = RecipeService.getInstance();
-      recipeService.searchRecipeInfoById(this.props.recipeId).then(recipe => {
-        this.setState(prevState => {
-          return {
-            recipeId: prevState.recipeId,
-            recipe: recipe,
-            isLiked: prevState.isLiked
-          };
-        });
+      recipeService.getAdminRecipeById(this.props.recipeId).then(recipe => {
+        if (recipe.status === "incorrect recipe id") {
+          recipeService.searchRecipeInfoById(this.props.recipeId).then(recipe => {
+            this.setState(prevState => {
+              return {
+                recipeId: prevState.recipeId,
+                recipe: recipe,
+                isLiked: prevState.isLiked
+              };
+            });
+          });
+        } else {
+          this.setState(prevState => {
+            return {
+              recipeId: prevState.recipeId,
+              recipe: recipe,
+              isLiked: prevState.isLiked
+            };
+          });
+        }
       });
     }
   };

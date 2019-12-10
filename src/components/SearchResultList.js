@@ -8,9 +8,10 @@ const SearchResultList = ({recipes}) => {
             <ul className="list-group my-3">
                 {
                     recipes && recipes.map(recipe => {
+                        const recipeId = (recipe.id) ? recipe.id : recipe._id;
                         return (
-                            <Link key={recipe.id}
-                                  to={`./details/${recipe.id}`}>
+                            <Link key={recipeId}
+                                  to={`/details/${recipeId}`}>
                                 <li className="list-group-item">
                                     <SearchResultItem recipe={recipe}/>
                                 </li>

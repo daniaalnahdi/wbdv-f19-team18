@@ -2,16 +2,18 @@ import React from "react";
 import DietaryPills from "../components/DietaryPills";
 import ProfileLoginMessage from "../components/ProfileLoginMessage";
 import userService from "../service/UserService";
+import SearchResultList from "../components/SearchResultList";
 
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
-    if (this.props.user) console.log(this.props.user._id);
+    if (this.props.user) console.log("logged in user id:", this.props.user._id);
+    console.log("passed user id:", this.props.userId);
     this.state = {
       user: null,
       editing: false,
       relation: {
-        owner: this.props.user && (this.props.user._id === this.props.userId || this.props.userId === ''),
+        owner: this.props.user && (this.props.user._id === this.props.userId || !this.props.userId),
         following: false
       },
       signedIn: this.props.isLoggedIn
@@ -40,15 +42,16 @@ class ProfilePage extends React.Component {
     if (!this.state.relation.owner) {
       return <br />;
     } else {
+      const diets = (this.state.user && this.state.user.diets) ? this.state.user.diets : [];
       return (
         <div>
           <br />
-          <h3>{this.state.user.email}</h3>
+          <h3>{this.state.user && this.state.user.email}</h3>
           <br />
           <h2>Dietary Restrictions:</h2>
           <DietaryPills
             editing={this.state.editing}
-            dietaryRestrictions={this.state.user.dietaryRestrictions}
+            dietaryRestrictions={diets}
           />
           <br />
         </div>
@@ -71,7 +74,7 @@ class ProfilePage extends React.Component {
             editing: prevState.editing,
             relation: {
               owner: prevState.relation.owner,
-              following: !prevState.relation.owner
+              following: !prevState.relation.owner && user.followers
                   && (user.followers.find(follower => follower._id === this.props.user._id) !== undefined)
             },
             signedIn: prevState.signedIn
@@ -83,7 +86,7 @@ class ProfilePage extends React.Component {
 
   render() {
     const user = this.state.user;
-    console.log(this.state);
+    const likedRecipes = (user && user.likedRecipes) ? user.likedRecipes : [];
 
     if (this.props.isLoggedIn || this.props.userId) {
       return (
@@ -102,6 +105,7 @@ class ProfilePage extends React.Component {
           </h4>
           {this.sensitiveInfo()}
           <h2>Liked Recipes:</h2>
+          <SearchResultList recipes={likedRecipes}/>
         </div>
       );
     } else {
