@@ -128,11 +128,10 @@ class HomePage extends React.Component {
   }
 
   loginUser(user) {
-    console.log(user);
     let admin = false;
 
-    if (user.__v == 1) {
-      admin = true;
+    if (user.type === "AdminModel") {
+      console.log(user.firstName)
     }
 
     this.setState(prevState => {
@@ -147,7 +146,15 @@ class HomePage extends React.Component {
   }
 
   render() {
-    let homePageDescription = <div className="container-fluid"><p>With Recipe Hunt, you can search, find, like, your favorite recipes! You can also interact with the members of our community in our recipe comments. Be sure to check out our exclusive Recipe Hunt recipes!</p></div>;
+    let homePageDescription = (
+      <div className="container-fluid">
+        <p>
+          With Recipe Hunt, you can search, find, like, your favorite recipes!
+          You can also interact with the members of our community in our recipe
+          comments. Be sure to check out our exclusive Recipe Hunt recipes!
+        </p>
+      </div>
+    );
 
     let homePageMessage = "";
     let loginPrompt = (

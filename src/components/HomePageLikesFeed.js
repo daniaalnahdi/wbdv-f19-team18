@@ -16,7 +16,7 @@ class HomePageLikesFeed extends React.Component {
         <div className=" list-group-item">
           <h3>
             {this.props.isLoggedIn
-              ? "Recently Liked By Friends"
+              ? "Recently Liked By Who You Follow"
               : "Recently Liked By Everyone"}
           </h3>
           {loginPrompt}

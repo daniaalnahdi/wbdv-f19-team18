@@ -16,7 +16,7 @@ export default class HomePageReviewsFeed extends React.Component {
           <h3>
             {this.props.isLoggedIn
               ? "Recent Comments By Friends"
-              : "Recent Comments by Everyone"}
+              : "Recent Comments By Who You Follow"}
           </h3>
           {loginPrompt}
           <ul className="list-group">

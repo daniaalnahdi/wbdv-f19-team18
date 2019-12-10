@@ -22,7 +22,7 @@ export default class AdminService {
 
     login = (username, password) => {
         return fetch(`${rootUrl}/users/login`, {
-            method: "GET",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ErrorMessage from "../components/ErrorMessage";
+import SuccessMessage from "../components/SuccessMessage";
 
 export default class LoginPage extends React.Component {
   constructor(props) {
@@ -8,7 +9,8 @@ export default class LoginPage extends React.Component {
     this.state = {
       username: "",
       password: "",
-      error: ""
+      error: "",
+      success: ""
     };
   }
 
@@ -54,7 +56,7 @@ export default class LoginPage extends React.Component {
 
     this.props.login(this.state.username, this.state.password);
 
-    if (this.props.user === null) {
+    if (this.props.user.error === "invalid login") {
       this.setState(prevState => {
         return {
           ...prevState,
@@ -63,13 +65,17 @@ export default class LoginPage extends React.Component {
       });
     } else if (this.props.user === '') {
       //nothing
-
     } else {
       //send info to homepage to populate data
       this.props.loginUser(this.props.user);
-    }
 
-    
+      this.setState(prevState => {
+        return {
+          ...prevState,
+          success: "Login successful."
+        };
+      });
+    }
   }
 
   render() {
@@ -77,6 +83,7 @@ export default class LoginPage extends React.Component {
       <div class="container-fluid">
         <h1>Login</h1>
         <ErrorMessage message={this.state.error} />
+        <SuccessMessage message={this.state.success} />
         <form>
           <div className="form-group row">
             <label for="username" className="col-sm-2 col-form-label">
