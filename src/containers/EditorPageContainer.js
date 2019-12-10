@@ -1,4 +1,4 @@
-import localRecipeService from "../service/localRecipeService"
+import localRecipeService from "../service/LocalRecipeService"
 import {connect} from 'react-redux'
 import EditorPage from "../pages/EditorPage";
 

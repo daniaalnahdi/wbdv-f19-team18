@@ -21,6 +21,7 @@ import ProfilePage from "./ProfilePage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
 import EditorPage from "./EditorPage";
 import ProfileLoginMessage from "../components/ProfileLoginMessage";
+import LocalRecipePage from "./LocalRecipePage";
 
 //TODO - use real data
 
@@ -196,13 +197,22 @@ class HomePage extends React.Component {
               )}
             />
             <Route
-              path="/editor"
+              path="/editor/:recipeId?"
               render={props => (
-                  <Provider store={editorPageStore}>
-                    <EditorPageContainer />
-                  </Provider>
+                  //<Provider store={editorPageStore}>
+                    <EditorPage {...props}/>
+                  //</Provider>
                 // <EditorPage {...props} isLoggedIn={this.state.isLoggedIn} />
               )}
+            />
+            <Route
+                path="/localRecipes"
+
+                render={props => (
+                   // <Provider store={editorPageStore}>
+                      <LocalRecipePage/>
+                   // </Provider>
+                )}
             />
             <Route exact path="/">
               {homePageMessage}

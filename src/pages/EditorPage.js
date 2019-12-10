@@ -1,5 +1,6 @@
 import React from "react";
-import localRecipeService from "../service/localRecipeService";
+import localRecipeService from "../service/LocalRecipeService";
+import {Link} from "react-router-dom";
 
 const service = localRecipeService.getInstance()
 
@@ -7,19 +8,52 @@ class EditorPage extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log("recipeId")
+        const recipeId = this.props.match.params.recipeId
+        console.log(recipeId)
+        const isUpdateMode = (recipeId != null)
+        console.log(isUpdateMode)
         this.state = {
             // recipe: {
-                title: '',
-                preparationMinutes: '',
-                cookingMinutes: '',
-                readyInMinutes: '',
-                servings: '',
-                instructions: '',
-                image: '',
-                diets: '',
-                interactions: null
+            title: '',
+            preparationMinutes: '',
+            cookingMinutes: '',
+            readyInMinutes: '',
+            servings: '',
+            instructions: '',
+            image: '',
+            diets: '',
+            interactions: null
             // }
+
         }
+    }
+
+    componentDidMount() {
+        const recipeId = this.props.match.params.recipeId
+        if ((recipeId != null)) {
+            service.findRecipeById(recipeId).then(recipe => {
+                console.log(recipe)
+                console.log(recipe.title)
+                console.log(recipe._id)
+                this.setState({
+                    // recipe: {
+                    _id: recipe._id,
+                    title: recipe.title,
+                    preparationMinutes: recipe.preparationMinutes,
+                    cookingMinutes: recipe.cookingMinutes,
+                    readyInMinutes: recipe.readyInMinutes,
+                    servings: recipe.servings,
+                    instructions: recipe.instructions,
+                    image: recipe.image,
+                    diets: recipe.diets,
+                    interactions: recipe.interactions
+                    // }
+                })
+            })
+        }
+
+
     }
 
     recipeNameUpdated = event =>
@@ -49,7 +83,7 @@ class EditorPage extends React.Component {
     instructionsUpdated = event =>
         this.setState({
             // recipe: {instructions: event.target.value}
-             instructions: event.target.value
+            instructions: event.target.value
         })
 
     imageUrlUpdated = event =>
@@ -61,14 +95,19 @@ class EditorPage extends React.Component {
     createRecipe = recipe => {
         console.log(recipe)
         // console.log(JSON.stringify(recipe))
-        //service.createRecipe(recipe).then(recipe => console.log(recipe))
-        fetch("https://wbdv-t18-server-node.herokuapp.com/api/recipes", {
-            method: 'post',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(recipe)
-        }).then(response => console.log(response.json()))
+        service.createRecipe(recipe).then(recipe => console.log(recipe))
+        // fetch("https://wbdv-t18-server-node.herokuapp.com/api/recipes", {
+        //     method: 'post',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(recipe)
+        // }).then(response => console.log(response.json()))
+    }
+    updateRecipe = recipe => {
+        console.log(recipe)
+        console.log(recipe._id)
+        service.updateRecipe(recipe._id, recipe).then(recipe => console.log(recipe))
     }
 
 
@@ -155,27 +194,61 @@ class EditorPage extends React.Component {
                                 placeholder="Image URL"/>
                         </div>
                     </div>
-                    <div className="form-group row">
-                        <button
-                            onClick={() => this.createRecipe({
-                                // recipe: {
-                                    title: this.state.title,
-                                    preparationMinutes: this.state.preparationMinutes,
-                                    cookingMinutes: this.state.cookingMinutes,
-                                    readyInMinutes: this.state.readyInMinutes,
-                                    servings: this.state.servings,
-                                    instructions: this.state.instructions,
-                                    image: this.state.image,
-                                    diet: this.state.diet,
-                                    interaction: this.state.interaction
-                                // }
-                            })}
-                            className="form-control btn btn-primary">
-                            Add Recipe
-                        </button>
-                    </div>
+                    {
+                        this.props.match.params.recipeId == null ?
+                            <Link to={`/localRecipes`}>
+                                <div className="form-group row">
+                                    <button
+                                        onClick={() => this.createRecipe({
+                                            // recipe: {
+                                            title: this.state.title,
+                                            preparationMinutes: this.state.preparationMinutes,
+                                            cookingMinutes: this.state.cookingMinutes,
+                                            readyInMinutes: this.state.readyInMinutes,
+                                            servings: this.state.servings,
+                                            instructions: this.state.instructions,
+                                            image: this.state.image,
+                                            diet: this.state.diet,
+                                            interaction: this.state.interaction
+                                            // }
+                                        })}
+                                        className="form-control btn btn-primary">
+                                        Add Recipe
+                                    </button>
+                                </div>
+                            </Link>
+                            :
+                            <Link to={`/localRecipes`}>
+                                <div className="form-group row">
+
+                                    <button
+                                        onClick={() => this.updateRecipe({
+                                            // recipe: {
+                                            _id: this.state._id,
+                                            title: this.state.title,
+                                            preparationMinutes: this.state.preparationMinutes,
+                                            cookingMinutes: this.state.cookingMinutes,
+                                            readyInMinutes: this.state.readyInMinutes,
+                                            servings: this.state.servings,
+                                            instructions: this.state.instructions,
+                                            image: this.state.image,
+                                            diet: this.state.diet,
+                                            interaction: this.state.interaction
+                                            // }
+                                        })}
+                                        className="form-control btn btn-primary">
+                                        Update Recipe
+                                    </button>
+
+                                </div>
+                            </Link>
+
+
+                    }
                 </div>
-            </div>)
+            </div>
+
+        )
     }
 
 }
