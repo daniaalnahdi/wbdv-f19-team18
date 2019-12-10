@@ -32,7 +32,6 @@ export default class LoginPage extends React.Component {
     });
   }
 
-  //TODO validate username and pw match
   validate() {
     if (this.state.username === "" || this.state.password === "") {
       this.setState(prevState => {
