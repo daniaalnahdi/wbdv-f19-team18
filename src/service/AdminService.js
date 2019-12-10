@@ -1,22 +1,22 @@
 const rootUrl = "https://wbdv-t18-server-node.herokuapp.com/api";
 
-export default class UserService {
+export default class AdminService {
     static myInstance = null;
 
     static getInstance() {
-        if(UserService.myInstance == null) {
-            UserService.myInstance = new UserService()
+        if(AdminService.myInstance == null) {
+            AdminService.myInstance = new AdminService()
         }
         return this.myInstance
     }
 
-    findAllUsers = () => {
-        return fetch(`${rootUrl}/users`)
+    findAllAdmins = () => {
+        return fetch(`${rootUrl}/admins`)
             .then(response => response.json());
     };
 
-    findUserById = userId => {
-        return fetch(`${rootUrl}/users/${userId}`)
+    findAdminById = adminId => {
+        return fetch(`${rootUrl}/admins/${adminId}`)
             .then(response => response.json());
     };
 
@@ -34,30 +34,30 @@ export default class UserService {
             .then(response => response.json());
     };
 
-    createUser = user => {
-        return fetch(`${rootUrl}/users`, {
+    createAdmin = admin => {
+        return fetch(`${rootUrl}/admins`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(admin)
         })
             .then(response => response.json());
     };
 
-    updateUser = (id, user) => {
-        return fetch(`${rootUrl}/users/${id}`, {
+    updateAdmin = (id, admin) => {
+        return fetch(`${rootUrl}/admins/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(admin)
         })
             .then(response => response.json());
     };
 
-    deleteUser = userId => {
-        return fetch(`${rootUrl}/users/${userId}`, {
+    deleteAdmin = adminId => {
+        return fetch(`${rootUrl}/admins/${adminId}`, {
             method: 'DELETE'
         })
             .then(response => response.json());
