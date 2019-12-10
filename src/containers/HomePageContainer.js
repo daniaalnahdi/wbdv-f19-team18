@@ -4,8 +4,7 @@ import UserService from "../service/UserService";
 
 const stateToPropertyMapper = (state, ownProps) => {
     return {
-        likesFeed: state.likes,
-        commentsFeed: state.comments
+        user: state.user
     };
 };
 
@@ -15,10 +14,10 @@ const dispatcherToPropertyMapper = (dispatch, ownProps) => {
     return {
         login: (username, password) => {
             service.login(username, password)
-                .then(() => {
+                .then(user => {
                     dispatch({
-                        type: 'FIND_ALL_LIKES',
-                        likesFeed: state.likes
+                        type: 'LOGIN',
+                        user: user
                     });
                 });
         },
