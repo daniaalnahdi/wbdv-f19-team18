@@ -13,13 +13,13 @@ const service = UserService.getInstance();
 const dispatcherToPropertyMapper = (dispatch) => {
     return {
         login: (username, password) => {
-            service.login(username, password)
+            return service.login(username, password)
                 .then(user => {
-                    dispatch({
+                    const dispatchObj = dispatch({
                         type: 'LOGIN',
                         user: user
-                    }
-                    );
+                    });
+                    return dispatchObj.user;
                 });
         },
     };

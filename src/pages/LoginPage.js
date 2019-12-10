@@ -54,28 +54,29 @@ export default class LoginPage extends React.Component {
   loginUser() {
     this.validate();
 
-    this.props.login(this.state.username, this.state.password);
+    this.props.login(this.state.username, this.state.password)
+        .then(user => {
+          if (user.error === "invalid login") {
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                error: "Incorrect username or password."
+              };
+            });
+          } else if (user === '') {
+            //nothing
+          } else {
+            //send info to homepage to populate data
+            this.props.loginUser(user);
 
-    if (this.props.user.error === "invalid login") {
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          error: "Incorrect username or password."
-        };
-      });
-    } else if (this.props.user === '') {
-      //nothing
-    } else {
-      //send info to homepage to populate data
-      this.props.loginUser(this.props.user);
-
-      this.setState(prevState => {
-        return {
-          ...prevState,
-          success: "Login successful."
-        };
-      });
-    }
+            this.setState(prevState => {
+              return {
+                ...prevState,
+                success: "Login successful."
+              };
+            });
+          }
+        });
   }
 
   render() {
