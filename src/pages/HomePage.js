@@ -137,7 +137,10 @@ class HomePage extends React.Component {
     return (
       <div>
         <Router>
-          <NavBar isLoggedIn={this.state.isLoggedIn} user={this.state.isLoggedIn ? loggedInUser : null}></NavBar>
+          <NavBar
+            isLoggedIn={this.state.isLoggedIn}
+            user={this.state.isLoggedIn ? loggedInUser : null}
+          ></NavBar>
           <PrivacyPolicyMessage
             hidden={this.state.hidePolicyMessage}
             hide={() => {
@@ -160,7 +163,7 @@ class HomePage extends React.Component {
               <PrivacyPolicyPage />
             </Route>
             <Route
-              path="/search/:searchName?"
+              path="/search"
               render={() => (
                 <div className="container-fluid my-3">
                   <Provider store={store}>
@@ -181,7 +184,12 @@ class HomePage extends React.Component {
             />
             <Route
               path="/profile/:id?"
-              render={props => <ProfilePage userId={props.match.params.id} />}
+              render={props => (
+                <ProfilePage
+                  userId={props.match.params.id}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+              )}
             />
             <Route
               path="/editor"
