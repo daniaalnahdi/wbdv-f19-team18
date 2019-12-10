@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RecipeDetailsReviewForm from "./RecipeDetailsReviewForm";
+import RecipeDetailsReviewForm from "./RecipeDetailsCommentsForm";
 
 class RecipeDetailsReview extends React.Component {
   constructor(props) {

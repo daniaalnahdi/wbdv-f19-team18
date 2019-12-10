@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import RecipeService from "../service/RecipeService";
 import RecipeDetailsLikes from "../components/RecipeDetailsLikes";
-import RecipeDetailsReviews from "../components/RecipeDetailsReviews";
+import RecipeDetailsReviews from "../components/RecipeDetailsComments";
 
 const recipeInteractions = {
   likedBy: [
