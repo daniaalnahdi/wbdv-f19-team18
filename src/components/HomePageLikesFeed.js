@@ -19,7 +19,6 @@ class HomePageLikesFeed extends React.Component {
               ? "Recently Liked By Who You Follow"
               : "Recently Liked By Everyone"}
           </h3>
-          {loginPrompt}
           <ul className="list-group">
             {this.props.likes &&
               this.props.likes.map(like => {
