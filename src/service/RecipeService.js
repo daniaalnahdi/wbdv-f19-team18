@@ -46,6 +46,11 @@ export default class RecipeService {
           .then(response => response.json());
   };
 
+  getRecipeInteractions = recipeId => {
+      return fetch(`${rootUrl}/recipes/${recipeId}/interactions`)
+          .then(response => response.json());
+  };
+
   createRecipe = recipe => {
       return fetch(`${rootUrl}/recipes`, {
           method: 'POST',

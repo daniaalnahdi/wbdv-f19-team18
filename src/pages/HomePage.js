@@ -5,6 +5,8 @@ import LoginPageContainer from "../containers/LoginPageContainer";
 import React from "react";
 import { createStore } from "redux";
 import SearchPageReducer from "../reducers/SearchPageReducer";
+import EditorPageReducer from "../reducers/EditorPageReducer";
+import EditorPageContainer from "../containers/EditorPageContainer";
 import LoginPageReducer from "../reducers/LoginPageReducer";
 //UI Elements
 import NavBar from "../components/NavBar";
@@ -19,8 +21,9 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import ProfilePage from "./ProfilePage";
 import PrivacyPolicyPage from "./PrivacyPolicyPage";
-import RecipeEditor from "./RecipeEditor";
+import EditorPage from "./EditorPage";
 import ProfileLoginMessage from "../components/ProfileLoginMessage";
+import LocalRecipePage from "./LocalRecipePage";
 
 //TODO - use real data
 
@@ -107,6 +110,8 @@ const loggedInUser = {
 
 const searchStore = createStore(SearchPageReducer);
 const loginStore = createStore(LoginPageReducer);
+
+const editorPageStore = createStore(EditorPageReducer)
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -222,10 +227,22 @@ class HomePage extends React.Component {
               )}
             />
             <Route
-              path="/editor"
+              path="/editor/:recipeId?"
               render={props => (
-                <RecipeEditor {...props} isLoggedIn={this.state.isLoggedIn} />
+                  //<Provider store={editorPageStore}>
+                    <EditorPage {...props}/>
+                  //</Provider>
+                // <EditorPage {...props} isLoggedIn={this.state.isLoggedIn} />
               )}
+            />
+            <Route
+                path="/localRecipes"
+
+                render={props => (
+                   // <Provider store={editorPageStore}>
+                      <LocalRecipePage/>
+                   // </Provider>
+                )}
             />
             <Route exact path="/">
               {homePageMessage}
