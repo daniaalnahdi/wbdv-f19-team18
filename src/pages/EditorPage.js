@@ -52,8 +52,6 @@ class EditorPage extends React.Component {
                 })
             })
         }
-
-
     }
 
     recipeNameUpdated = event =>
@@ -196,10 +194,10 @@ class EditorPage extends React.Component {
                     </div>
                     {
                         this.props.match.params.recipeId == null ?
-                            <Link to={`/localRecipes`}>
+
                                 <div className="form-group row">
                                     <button
-                                        onClick={() => this.createRecipe({
+                                        onClick={() => {this.createRecipe({
                                             // recipe: {
                                             title: this.state.title,
                                             preparationMinutes: this.state.preparationMinutes,
@@ -211,18 +209,16 @@ class EditorPage extends React.Component {
                                             diet: this.state.diet,
                                             interaction: this.state.interaction
                                             // }
-                                        })}
+                                        }); alert('Recipe Created')}}
                                         className="form-control btn btn-primary">
                                         Add Recipe
                                     </button>
                                 </div>
-                            </Link>
                             :
-                            <Link to={`/localRecipes`}>
                                 <div className="form-group row">
 
                                     <button
-                                        onClick={() => this.updateRecipe({
+                                        onClick={() => {this.updateRecipe({
                                             // recipe: {
                                             _id: this.state._id,
                                             title: this.state.title,
@@ -235,16 +231,22 @@ class EditorPage extends React.Component {
                                             diet: this.state.diet,
                                             interaction: this.state.interaction
                                             // }
-                                        })}
+                                        });alert('Recipe updated')}}
                                         className="form-control btn btn-primary">
                                         Update Recipe
                                     </button>
 
                                 </div>
-                            </Link>
-
 
                     }
+                    <Link to={`/localRecipes`}>
+                        <div className="form-group row">
+                            <button
+                                className="form-control btn btn-primary">
+                                Return to Recipe List
+                            </button>
+                        </div>
+                    </Link>
                 </div>
             </div>
 

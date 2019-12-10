@@ -22,6 +22,7 @@ import PrivacyPolicyPage from "./PrivacyPolicyPage";
 import EditorPage from "./EditorPage";
 import ProfileLoginMessage from "../components/ProfileLoginMessage";
 import LocalRecipePage from "./LocalRecipePage";
+import LocalRecipeDetail from "../components/LocalRecipeDetail";
 
 //TODO - use real data
 
@@ -206,8 +207,15 @@ class HomePage extends React.Component {
               )}
             />
             <Route
-                path="/localRecipes"
-
+                path="/localRecipes/:recipeId"
+                render={props => (
+                    // <Provider store={editorPageStore}>
+                    <LocalRecipeDetail {...props}/>
+                    // </Provider>
+                )}
+            />
+            <Route
+                exact path="/localRecipes"
                 render={props => (
                    // <Provider store={editorPageStore}>
                       <LocalRecipePage/>

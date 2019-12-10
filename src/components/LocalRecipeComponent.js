@@ -7,8 +7,8 @@ const LocalRecipeComponent = ({recipes, deleteRecipe}) =>
             recipes && recipes.map(recipe =>
                 <li key={recipe.title}
                     className="list-group-item">
-                    <Link to={`/editor/${recipe._id}`}>
-                    {recipe.title}
+                    <Link to={`/localRecipes/${recipe._id}`}>
+                        {recipe.title}
                     </Link>
                     <button
                         onClick={() => deleteRecipe(recipe._id)}
@@ -16,6 +16,11 @@ const LocalRecipeComponent = ({recipes, deleteRecipe}) =>
                         {/*<i className="fa fa-times"></i>*/}
                         X
                     </button>
+                    <Link to={`/editor/${recipe._id}`}>
+                        <button className="float-right">
+                            Update
+                        </button>
+                    </Link>
                 </li>)
         }
     </ul>
