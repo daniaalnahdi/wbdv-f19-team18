@@ -45,8 +45,8 @@ export default class UserService {
             .then(response => response.json());
     };
 
-    updateUser = user => {
-        return fetch(`${rootUrl}/users`, {
+    updateUser = (id, user) => {
+        return fetch(`${rootUrl}/users/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
