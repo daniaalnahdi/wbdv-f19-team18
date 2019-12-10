@@ -131,7 +131,7 @@ class HomePage extends React.Component {
     let admin = false;
 
     if (user.type === "AdminModel") {
-      console.log(user.firstName)
+      admin = true;
     }
 
     this.setState(prevState => {
