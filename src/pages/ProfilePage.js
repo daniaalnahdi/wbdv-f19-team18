@@ -1,36 +1,20 @@
 import React from "react";
 import DietaryPills from "../components/DietaryPills";
 import ProfileLoginMessage from "../components/ProfileLoginMessage";
-const dummyUser = {
-  firstName: "Sammy",
-  lastName: "Wilson",
-  username: "swilson",
-  followers: [],
-  following: [],
-  email: "swilson234@example.com",
-  dietaryRestrictions: ["vegan", "whole30"],
-  likedRecipes: [
-    {
-      title: "Indian Potato Curry",
-      readyInMinutes: 40,
-      servings: 4,
-      image:
-        "https://spoonacular.com/recipeImages/six-ingredient-indian-potato-curry-849494.jpg"
-    }
-  ]
-};
+import userService from "../service/UserService";
 
 class ProfilePage extends React.Component {
   constructor(props) {
     super(props);
+    if (this.props.user) console.log(this.props.user._id);
     this.state = {
-      user: dummyUser,
+      user: null,
       editing: false,
       relation: {
-        owner: true,
+        owner: this.props.user && (this.props.user._id === this.props.userId || this.props.userId === ''),
         following: false
       },
-      signedIn: true
+      signedIn: this.props.isLoggedIn
     };
   }
 
@@ -72,23 +56,49 @@ class ProfilePage extends React.Component {
     }
   };
 
-  render() {
-    console.log(this.props.isLoggedIn);
+  componentDidMount() {
+    console.log("Component did mount");
+    console.log(this.state.user);
+    if (!this.state.user) {
+      if (!this.props.userId && !this.props.user) return;
+      const id = (this.props.userId) ? this.props.userId : this.props.user._id;
+      const service = userService.getInstance();
+      service.findUserById(id).then(user => {
+        console.log(user);
+        this.setState(prevState => {
+          return {
+            user: user,
+            editing: prevState.editing,
+            relation: {
+              owner: prevState.relation.owner,
+              following: !prevState.relation.owner
+                  && (user.followers.find(follower => follower._id === this.props.user._id) !== undefined)
+            },
+            signedIn: prevState.signedIn
+          };
+        });
+      });
+    }
+  };
 
-    if (this.props.isLoggedIn) {
+  render() {
+    const user = this.state.user;
+    console.log(this.state);
+
+    if (this.props.isLoggedIn || this.props.userId) {
       return (
         <div className="container-fluid">
           <div className="row m-2">
             <h1>
-              {this.state.user.firstName} {this.state.user.lastName}
+              {user && user.firstName} {user && user.lastName}
             </h1>
             <div className="col-1" />
             <div className="float-right">{this.determineButton()}</div>
           </div>
-          <h3>@{this.state.user.username}</h3>
+          <h3>@{user && user.username}</h3>
           <h4>
-            {this.state.user.followers.length} followers
-            {this.state.user.following.length} following
+            {user && user.followers.length} followers
+            {user && user.following.length} following
           </h4>
           {this.sensitiveInfo()}
           <h2>Liked Recipes:</h2>
