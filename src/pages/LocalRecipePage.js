@@ -33,7 +33,7 @@ class LocalRecipePage extends React.Component {
     render = () => {
         return (
             <div className="container-fluid">
-                <h1>RecipeList</h1>
+                <h1>Admin Recipes</h1>
                 <Link to={`/editor`}>
                     <button className="form-control btn btn-primary">
                         Add Recipe
