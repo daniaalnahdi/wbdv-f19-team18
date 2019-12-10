@@ -5,40 +5,40 @@ import RecipeService from "../service/RecipeService";
 import RecipeDetailsLikes from "../components/RecipeDetailsLikes";
 import RecipeDetailsComments from "../components/RecipeDetailsComments";
 
-const recipeInteractions = {
-  likedBy: [
-    {
-      name: "User 1",
-      username: "username1"
-    },
-    {
-      name: "User 2",
-      username: "username2"
-    }
-  ],
-  reviews: [
-    {
-      reviewId: 1,
-      user: {
-        name: "User 1",
-        username: "username1",
-        userId: 123
-      },
-      heading: "Review 1",
-      body: "Yum"
-    },
-    {
-      reviewId: 2,
-      user: {
-        name: "User 2",
-        username: "username2",
-        userId: 234
-      },
-      heading: "Review 2",
-      body: "Good"
-    }
-  ]
-};
+// const recipeInteractions = {
+//   likedBy: [
+//     {
+//       name: "User 1",
+//       username: "username1"
+//     },
+//     {
+//       name: "User 2",
+//       username: "username2"
+//     }
+//   ],
+//   reviews: [
+//     {
+//       reviewId: 1,
+//       user: {
+//         name: "User 1",
+//         username: "username1",
+//         userId: 123
+//       },
+//       heading: "Review 1",
+//       body: "Yum"
+//     },
+//     {
+//       reviewId: 2,
+//       user: {
+//         name: "User 2",
+//         username: "username2",
+//         userId: 234
+//       },
+//       heading: "Review 2",
+//       body: "Good"
+//     }
+//   ]
+// };
 
 class DetailPage extends React.Component {
   constructor(props) {
@@ -58,12 +58,19 @@ class DetailPage extends React.Component {
       recipeService.getAdminRecipeById(this.props.recipeId).then(recipe => {
         if (recipe.status === "incorrect recipe id") {
           recipeService.searchRecipeInfoById(this.props.recipeId).then(recipe => {
-            this.setState(prevState => {
-              return {
-                recipeId: prevState.recipeId,
-                recipe: recipe,
-                isLiked: prevState.isLiked
+            recipeService.getRecipeInteractions(this.props.recipeId).then(interactions => {
+              recipe = {
+                ...recipe,
+                interactions: interactions
               };
+              console.log(recipe);
+              this.setState(prevState => {
+                return {
+                  recipeId: prevState.recipeId,
+                  recipe: recipe,
+                  isLiked: prevState.isLiked
+                };
+              });
             });
           });
         } else {
@@ -126,7 +133,7 @@ class DetailPage extends React.Component {
 
   renderLikeButton = () => {
     if (!this.props.isLoggedIn) {
-      return <Link to="/login">Login to Like!</Link>;
+      return <Link to="/login">Login to Like or Review!</Link>;
     } else {
       if (this.state.isLiked) {
         return (
@@ -186,11 +193,11 @@ class DetailPage extends React.Component {
           <p>{recipe && recipe.instructions}</p>
         </div>
         {this.renderLikeButton()}
-        <RecipeDetailsLikes likedBy={recipeInteractions.likedBy} />
+        <RecipeDetailsLikes likedBy={(recipe && recipe.interactions.likedBy) ? recipe.interactions.likedBy : []} />
         <RecipeDetailsComments
           isLoggedIn={this.props.isLoggedIn}
           user={this.props.user}
-          reviews={recipeInteractions.reviews}
+          reviews={(recipe && recipe.interactions.comments) ? recipe.interactions.comments : []}
           recipeId={this.state.recipeId}
           admin={this.props.admin}
         />
