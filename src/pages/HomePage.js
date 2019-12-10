@@ -3,13 +3,16 @@ import { Provider } from "react-redux";
 import SearchPageContainer from "../containers/SearchPageContainer";
 import LoginPageContainer from "../containers/LoginPageContainer";
 import DetailPageContainer from "../containers/DetailPageContainer";
+import RegisterPageContainer from "../containers/RegisterPageContainer";
 import React from "react";
 import { createStore } from "redux";
 import SearchPageReducer from "../reducers/SearchPageReducer";
 import EditorPageReducer from "../reducers/EditorPageReducer";
 import EditorPageContainer from "../containers/EditorPageContainer";
 import LoginPageReducer from "../reducers/LoginPageReducer";
-import DetailPageReducer from "../reducers/LoginPageReducer";
+import DetailPageReducer from "../reducers/DetailPageReducer";
+import RegisterPageReducer from "../reducers/RegisterPageReducer";
+
 //UI Elements
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -114,6 +117,7 @@ const loggedInUser = {
 const searchStore = createStore(SearchPageReducer);
 const loginStore = createStore(LoginPageReducer);
 const detailStore = createStore(DetailPageReducer);
+const registerStore = createStore(RegisterPageReducer);
 const editorPageStore = createStore(EditorPageReducer);
 
 class HomePage extends React.Component {
@@ -152,7 +156,7 @@ class HomePage extends React.Component {
         <p>
           With Recipe Hunt, you can search, find, like, your favorite recipes!
           You can also interact with the members of our community in our recipe
-          comments. Be sure to check out our exclusive Recipe Hunt recipes!
+          comments, and view their profiles to learn about their diets. Be sure to check out our exclusive Recipe Hunt recipes!
         </p>
       </div>
     );
@@ -179,6 +183,7 @@ class HomePage extends React.Component {
           <NavBar
             isLoggedIn={this.state.isLoggedIn}
             user={this.state.user}
+            admin={this.state.admin}
           ></NavBar>
           <PrivacyPolicyMessage
             hidden={this.state.hidePolicyMessage}
@@ -205,7 +210,11 @@ class HomePage extends React.Component {
               )}
             />
             <Route path="/register">
-              <RegisterPage />
+            <div className="container-fluid my-3">
+              <Provider store={registerStore}>
+                <RegisterPageContainer />
+              </Provider>
+              </div>
             </Route>
             <Route path="/privacy-policy">
               <PrivacyPolicyPage />

@@ -1,6 +1,8 @@
 import {connect} from 'react-redux';
-import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 import UserService from "../service/UserService";
+import AdminService from "../service/AdminService";
+
 
 const stateToPropertyMapper = (state, ownProps) => {
     return {
@@ -8,15 +10,15 @@ const stateToPropertyMapper = (state, ownProps) => {
     };
 };
 
-const service = UserService.getInstance();
+const userService = UserService.getInstance();
 
 const dispatcherToPropertyMapper = (dispatch) => {
     return {
-        login: (username, password) => {
-            service.login(username, password)
+        createUser: (user) => {
+            userService.createUser(user)
                 .then(user => {
                     dispatch({
-                        type: 'LOGIN',
+                        type: 'CREATE_USER',
                         user: user
                     }
                     );
@@ -25,7 +27,7 @@ const dispatcherToPropertyMapper = (dispatch) => {
     };
 };
 
-const LoginPageContainer =
-    connect(stateToPropertyMapper, dispatcherToPropertyMapper)(LoginPage);
+const RegisterPageContainer =
+    connect(stateToPropertyMapper, dispatcherToPropertyMapper)(RegisterPage);
 
-export default LoginPageContainer;
+export default RegisterPageContainer;
