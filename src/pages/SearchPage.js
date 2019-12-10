@@ -1,5 +1,6 @@
 import React from "react";
 import SearchResultList from "../components/SearchResultList";
+import RecipeService from "../service/RecipeService";
 
 export default class SearchPage extends React.Component {
   constructor(props) {
@@ -33,7 +34,9 @@ export default class SearchPage extends React.Component {
           >
             Search Online Recipes
           </button>
-          <button className="btn btn-success" type="button" onClick={() => {}}>
+          <button className="btn btn-success" type="button" onClick={() => {
+            this.props.searchAdminRecipeByName(this.state.searchName);
+          }}>
             Search Exclusive Recipes
           </button>
         </div>
