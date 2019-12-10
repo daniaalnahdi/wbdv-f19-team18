@@ -17,10 +17,11 @@ class NavBar extends React.Component {
               <Link to="/search" className="nav-item nav-link">
                 Search
               </Link>
-              {!this.props.isLoggedIn &&
-              <Link to="/login" className="nav-item nav-link">
-                Login
-              </Link>}
+              {!this.props.isLoggedIn && (
+                <Link to="/login" className="nav-item nav-link">
+                  Login
+                </Link>
+              )}
               {this.props.isLoggedIn && (
                 <Link to="/profile" className="nav-item nav-link">
                   Profile
@@ -31,10 +32,10 @@ class NavBar extends React.Component {
                   Profile
                 </Link>
               )}
-              {this.props.isLoggedIn && (
-                  <Link to="/localRecipes" className="nav-item nav-link">
-                    Local Recipes
-                  </Link>
+              {this.props.isLoggedIn && this.props.admin && (
+                <Link to="/localRecipes" className="nav-item nav-link">
+                  Local Recipes
+                </Link>
               )}
               {this.props.isLoggedIn && this.props.admin && (
                 <Link to="/editor" className="nav-item nav-link">
@@ -43,12 +44,14 @@ class NavBar extends React.Component {
               )}
               {this.props.isLoggedIn && !this.props.admin && (
                 <Link to="/profile" className="nav-link disabled">
-                  Logged In As {this.props.user.firstName} {this.props.user.lastName}
+                  Logged In As {this.props.user.firstName}{" "}
+                  {this.props.user.lastName}
                 </Link>
               )}
               {this.props.isLoggedIn && this.props.admin && (
                 <Link to="/profile" className="nav-link disabled">
-                  Logged In As {this.props.user.firstName} {this.props.user.lastName} (Admin)
+                  Logged In As {this.props.user.firstName}{" "}
+                  {this.props.user.lastName} (Admin)
                 </Link>
               )}
             </div>
