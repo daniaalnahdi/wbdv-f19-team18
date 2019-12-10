@@ -1,11 +1,15 @@
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import SearchPageContainer from "../containers/SearchPageContainer";
+import LoginPageContainer from "../containers/LoginPageContainer";
+import DetailPageContainer from "../containers/DetailPageContainer";
 import React from "react";
 import { createStore } from "redux";
 import SearchPageReducer from "../reducers/SearchPageReducer";
 import EditorPageReducer from "../reducers/EditorPageReducer";
 import EditorPageContainer from "../containers/EditorPageContainer";
+import LoginPageReducer from "../reducers/LoginPageReducer";
+import DetailPageReducer from "../reducers/LoginPageReducer";
 //UI Elements
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
@@ -107,34 +111,63 @@ const loggedInUser = {
   ]
 };
 
-// TODO -- check if user is actually logged in
-const LoggedIn = true;
-
-const store = createStore(SearchPageReducer);
-
-const editorPageStore = createStore(EditorPageReducer)
+const searchStore = createStore(SearchPageReducer);
+const loginStore = createStore(LoginPageReducer);
+const detailStore = createStore(DetailPageReducer);
+const editorPageStore = createStore(EditorPageReducer);
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoggedIn: LoggedIn,
-      hidePolicyMessage: false
+      isLoggedIn: false,
+      hidePolicyMessage: false,
+      user: null,
+      admin: false,
+      userFirstName: ""
     };
   }
 
+  loginUser(user) {
+    let admin = false;
+
+    if (user.type === "AdminModel") {
+      admin = true;
+    }
+
+    this.setState(prevState => {
+      return {
+        ...prevState,
+        isLoggedIn: true,
+        user: user,
+        admin: admin,
+        userFirstName: user.firstName
+      };
+    });
+  }
+
   render() {
+    let homePageDescription = (
+      <div className="container-fluid">
+        <p>
+          With Recipe Hunt, you can search, find, like, your favorite recipes!
+          You can also interact with the members of our community in our recipe
+          comments. Be sure to check out our exclusive Recipe Hunt recipes!
+        </p>
+      </div>
+    );
+
     let homePageMessage = "";
     let loginPrompt = (
-      <h4>
+      <h6>
         <Link to="login">Login</Link> to see your friends' recent likes and
         comments!
-      </h4>
+      </h6>
     );
-    let userGreeting = <h4>Welcome back, {loggedInUser.name}</h4>;
+    let userGreeting = <h4>Welcome back, {this.state.userFirstName}</h4>;
 
     homePageMessage = (
-      <div>
+      <div className="container-fluid">
         <h2>Hi!</h2>
         {this.state.isLoggedIn ? userGreeting : loginPrompt}
       </div>
@@ -145,7 +178,7 @@ class HomePage extends React.Component {
         <Router>
           <NavBar
             isLoggedIn={this.state.isLoggedIn}
-            user={this.state.isLoggedIn ? loggedInUser : null}
+            user={this.state.user}
           ></NavBar>
           <PrivacyPolicyMessage
             hidden={this.state.hidePolicyMessage}
@@ -159,9 +192,18 @@ class HomePage extends React.Component {
             }}
           />
           <Switch>
-            <Route path="/login">
-              <LoginPage />
-            </Route>
+            <Route
+              path="/login"
+              render={props => (
+                <div className="container-fluid my-3">
+                  <Provider store={loginStore}>
+                    <LoginPageContainer
+                      loginUser={user => this.loginUser(user)}
+                    />
+                  </Provider>
+                </div>
+              )}
+            />
             <Route path="/register">
               <RegisterPage />
             </Route>
@@ -172,7 +214,7 @@ class HomePage extends React.Component {
               path="/search"
               render={() => (
                 <div className="container-fluid my-3">
-                  <Provider store={store}>
+                  <Provider store={searchStore}>
                     <SearchPageContainer />
                   </Provider>
                 </div>
@@ -181,11 +223,14 @@ class HomePage extends React.Component {
             <Route
               path="/details/:id"
               render={props => (
-                <DetailPage
-                  recipeId={props.match.params.id}
-                  isLoggedIn={this.state.isLoggedIn}
-                  user={this.state.isLoggedIn ? loggedInUser : anonUser}
-                />
+                <Provider store={detailStore}>
+                  <DetailPageContainer
+                    recipeId={props.match.params.id}
+                    isLoggedIn={this.state.isLoggedIn}
+                    user={this.state.user}
+                    admin={this.state.admin}
+                  />
+                </Provider>
               )}
             />
             <Route
@@ -200,9 +245,9 @@ class HomePage extends React.Component {
             <Route
               path="/editor/:recipeId?"
               render={props => (
-                  //<Provider store={editorPageStore}>
-                    <EditorPage {...props}/>
-                  //</Provider>
+                //<Provider store={editorPageStore}>
+                <EditorPage {...props} />
+                //</Provider>
                 // <EditorPage {...props} isLoggedIn={this.state.isLoggedIn} />
               )}
             />
@@ -224,6 +269,7 @@ class HomePage extends React.Component {
             />
             <Route exact path="/">
               {homePageMessage}
+              {homePageDescription}
               <HomePageLikesFeed
                 isLoggedIn={this.state.isLoggedIn}
                 likes={

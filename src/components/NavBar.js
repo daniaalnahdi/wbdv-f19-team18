@@ -7,7 +7,7 @@ class NavBar extends React.Component {
       <div>
         <nav className="navbar navbar-expand-sm navbar-light bg-light">
           <Link to="/" className="navbar-brand">
-            App Name
+            Recipe Hunt
           </Link>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
@@ -31,19 +31,19 @@ class NavBar extends React.Component {
                   Profile
                 </Link>
               )}
-              {this.props.isLoggedIn && (
+              {this.props.isLoggedIn (
                   <Link to="/localRecipes" className="nav-item nav-link">
                     Local Recipes
                   </Link>
               )}
-              {this.props.isLoggedIn && (
+              {this.props.isLoggedIn && this.props.admin && (
                 <Link to="/editor" className="nav-item nav-link">
                   Create Recipe
                 </Link>
               )}
               {this.props.isLoggedIn && (
                 <Link to="/profile" className="nav-link disabled">
-                  Logged In As {this.props.user.name}
+                  Logged In As {this.props.user.firstName} {this.props.user.lastName} (Admin)
                 </Link>
               )}
             </div>

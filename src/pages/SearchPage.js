@@ -31,10 +31,10 @@ export default class SearchPage extends React.Component {
               this.props.searchRecipeByName(this.state.searchName);
             }}
           >
-            Search Recipes
+            Search Online Recipes
           </button>
           <button className="btn btn-success" type="button" onClick={() => {}}>
-            Search Admin Recipes
+            Search Exclusive Recipes
           </button>
         </div>
         <SearchResultList recipes={this.props.recipes} />

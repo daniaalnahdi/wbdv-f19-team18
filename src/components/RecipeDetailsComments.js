@@ -1,16 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import RecipeDetailsReviewForm from "./RecipeDetailsReviewForm";
+import RecipeDetailsReviewForm from "./RecipeDetailsCommentsForm";
 
 class RecipeDetailsReview extends React.Component {
+  
   constructor(props) {
     super(props);
     this.state = {
       reviews: this.props.reviews,
-      newReview: {
+      newComment: {
         recipeId: this.props.recipeId,
-        name: this.props.user.name,
-        username: this.props.user.username,
         heading: '',
         body: ''
       }
@@ -44,7 +43,7 @@ class RecipeDetailsReview extends React.Component {
   //TO DO - add functionality
   createReview() {
     console.log(
-      `${this.state.newReview.name} added ${this.state.newReview.heading}: ${this.state.newReview.body} for recipe ${this.state.newReview.recipeId}`
+      `${this.state.newComment.name} added ${this.state.newComment.heading}: ${this.state.newComment.body} for recipe ${this.state.newComment.recipeId}`
     );
 
     //Empty form
@@ -72,12 +71,12 @@ class RecipeDetailsReview extends React.Component {
 
     if (this.props.isLoggedIn) {
       //if admin, add delete for all reviews
-      if (this.props.user.admin) {
+      if (this.props.admin) {
         return delButton;
 
         //else, add button if logged in user = review author
       } else {
-        if (this.props.user.userId === authorId) {
+        if (this.props.user.id === authorId) {
           return delButton;
         }
       }
@@ -97,7 +96,7 @@ class RecipeDetailsReview extends React.Component {
                 return (
                   <li className="list-group-item">
                     <h3>{review.heading}</h3>
-                    Reviewed By:
+                    Comment By:
                     <Link to={`/profile/${review.user.username}`}>
                       {review.user.name}
                     </Link>
@@ -112,8 +111,8 @@ class RecipeDetailsReview extends React.Component {
           </ul>
           {this.props.isLoggedIn && (
             <RecipeDetailsReviewForm
-              heading={this.state.newReview.heading}
-              body={this.state.newReview.body}
+              heading={this.state.newComment.heading}
+              body={this.state.newComment.body}
               updateHeading={heading => this.updateNewReviewHeading(heading)}
               updateBody={body => this.updateNewReviewBody(body)}
               createReview={() => this.createReview()}

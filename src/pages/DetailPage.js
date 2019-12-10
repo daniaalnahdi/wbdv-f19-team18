@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import RecipeService from "../service/RecipeService";
 import RecipeDetailsLikes from "../components/RecipeDetailsLikes";
-import RecipeDetailsReviews from "../components/RecipeDetailsReviews";
+import RecipeDetailsComments from "../components/RecipeDetailsComments";
 
 const recipeInteractions = {
   likedBy: [
@@ -43,7 +43,7 @@ const recipeInteractions = {
 class DetailPage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.recipeId)
+    console.log(this.props.recipeId);
     this.state = {
       recipeId: this.props.recipeId,
       recipe: null,
@@ -52,8 +52,8 @@ class DetailPage extends React.Component {
   }
 
   componentDidMount = () => {
-    console.log("Component did mount")
-    console.log(this.state.recipeId)
+    console.log("Component did mount");
+    console.log(this.state.recipeId);
     if (!this.state.recipe) {
       const recipeService = RecipeService.getInstance();
       recipeService.searchRecipeInfoById(this.props.recipeId).then(recipe => {
@@ -68,7 +68,6 @@ class DetailPage extends React.Component {
     }
   };
 
-
   // componentWillReceiveProps(nextProps){
   //   if(this.props.recipeId !== nextProps.recipeId){
   //     this.setState({
@@ -82,10 +81,18 @@ class DetailPage extends React.Component {
   /* LIKE FUNCTIONALITY */
   //TODO check if the recipe has been liked
   isLiked = () => {
-    return false;
+    if (this.props.isLoggedIn) {
+      this.props.user.likedRecipes.forEach(recipe => {
+        if (recipe.id === this.state.recipeId) {
+          return true;
+        }
+      });
+      return false;
+    }
   };
 
   likeRecipe = () => {
+    this.props.likeRecipe(this.props.user.id, this.state.recipeId);
     this.setState(prevState => {
       return {
         recipeId: prevState.recipeId,
@@ -96,6 +103,7 @@ class DetailPage extends React.Component {
   };
 
   unlikeRecipe = () => {
+    this.props.unlikeRecipe(this.props.user.id, this.state.recipeId);
     this.setState(prevState => {
       return {
         recipeId: prevState.recipeId,
@@ -168,11 +176,12 @@ class DetailPage extends React.Component {
         </div>
         {this.renderLikeButton()}
         <RecipeDetailsLikes likedBy={recipeInteractions.likedBy} />
-        <RecipeDetailsReviews
+        <RecipeDetailsComments
           isLoggedIn={this.props.isLoggedIn}
           user={this.props.user}
           reviews={recipeInteractions.reviews}
           recipeId={this.state.recipeId}
+          admin={this.props.admin}
         />
       </div>
     );

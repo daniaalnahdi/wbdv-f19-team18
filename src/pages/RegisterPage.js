@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../css/RegisterPage.css";
 import { Link } from "react-router-dom";
 
 export default class RegisterPage extends React.Component {
@@ -8,14 +9,26 @@ export default class RegisterPage extends React.Component {
         <h1>Register</h1>
         <form>
           <div className="form-group row">
-            <label for="nameFld" className="col-sm-2 col-form-label">
-              Full Name
+            <label for="firstFld" className="col-sm-2 col-form-label">
+              First Name
             </label>
             <div class="col-sm-10">
               <input
                 className="form-control"
-                id="nameFld"
-                placeholder="Alice Wonderland"
+                id="firstFld"
+                placeholder="Alice"
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label for="lastFld" className="col-sm-2 col-form-label">
+              Last Name
+            </label>
+            <div class="col-sm-10">
+              <input
+                className="form-control"
+                id="lastFld"
+                placeholder="Wonderland"
               />
             </div>
           </div>
@@ -58,17 +71,60 @@ export default class RegisterPage extends React.Component {
             </div>
           </div>
           <div class="form-group row">
-            <label for="verifyPasswordFld" class="col-sm-2 col-form-label">
-              User Role?
-            </label>
+            <label className="col-sm-2 col-form-label">User Role?</label>
             <div class="col-sm-10">
               <input
                 type="checkbox"
-                class="form-check-input"
+                className={styles.checkbox + "form-check-input checkbox"}
                 id="exampleCheck1"
               />
-              <label class="form-check-label" for="exampleCheck1">
+              <label className="form-check-label" for="exampleCheck1">
                 Admin
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label className="col-sm-2 col-form-label">Diet?</label>
+            <div class="col-sm-10">
+              <input
+                type="checkbox"
+                className={styles.checkbox + "form-check-input checkbox"}
+                id="veg"
+              />
+              <label className="form-check-label" for="veg">
+                Vegetarian
+              </label>
+              <input
+                type="checkbox"
+                className={styles.checkbox + "form-check-input checkbox"}
+                id="v"
+              />
+              <label className="form-check-label" for="v">
+                Vegan
+              </label>
+              <input
+                type="checkbox"
+                className={styles.checkbox + "form-check-input checkbox"}
+                id="keto"
+              />
+              <label className="form-check-label" for="keto">
+                Ketogenic
+              </label>
+              <input
+                type="checkbox"
+                className={styles.checkbox + "form-check-input checkbox"}
+                id="healthy"
+              />
+              <label className="form-check-label" for="healthy">
+                Healthy
+              </label>
+              <input
+                type="checkbox"
+                className={styles.checkbox + "form-check-input checkbox"}
+                id="w30"
+              />
+              <label className="form-check-label" for="w30">
+                whole30
               </label>
             </div>
           </div>

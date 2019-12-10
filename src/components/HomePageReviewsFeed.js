@@ -11,29 +11,31 @@ export default class HomePageReviewsFeed extends React.Component {
       );
     }
     return (
-      <div className="border">
-        <h3>
-          {this.props.isLoggedIn
-            ? "Recently Reviewed By Friends"
-            : "Recently Reviewed"}
-        </h3>
-        {loginPrompt}
-        <ul className="list-group">
-          {this.props.reviews &&
-            this.props.reviews.map(review => {
-              return (
-                <li className="list-group-item">
-                  <Link to={`/profile/${review.user.username}`}>
-                    {review.user.name}
-                  </Link>
-                  Reviewed
-                  <Link to={`/details/${review.recipeId}`}>
-                    {review.recipeTitle}
-                  </Link>
-                </li>
-              );
-            })}
-        </ul>
+      <div className="container-fluid">
+        <div className=" list-group-item">
+          <h3>
+            {this.props.isLoggedIn
+              ? "Recent Comments By Friends"
+              : "Recent Comments By Who You Follow"}
+          </h3>
+          {loginPrompt}
+          <ul className="list-group">
+            {this.props.reviews &&
+              this.props.reviews.map(review => {
+                return (
+                  <li className="list-group-item">
+                    <Link to={`/profile/${review.user.username}`}>
+                      {review.user.name}
+                    </Link>
+                    Commented on
+                    <Link to={`/details/${review.recipeId}`}>
+                      {review.recipeTitle}
+                    </Link>
+                  </li>
+                );
+              })}
+          </ul>
+        </div>
       </div>
     );
   }
